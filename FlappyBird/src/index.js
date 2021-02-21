@@ -36,7 +36,7 @@ for (let colIndex = 0; colIndex < COL_COUNT; colIndex++) {
         rowElement.style.maxHeight = rowHeight + 'px';
         colElement.append(rowElement);
 
-    } 
+    }
     content.append(colElement)
 }
 
