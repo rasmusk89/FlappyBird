@@ -1,3 +1,3 @@
 ## FlappyBird
 
-FlappyBird in JavaScript
+FlappyBird project in JavaScript
