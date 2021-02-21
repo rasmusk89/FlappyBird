@@ -1,5 +1,5 @@
-const ROW_COUNT = 30;
-const COL_COUNT = 40;
+const ROW_COUNT = 40;
+const COL_COUNT = 50;
 
 let viewPortHeight = window.innerHeight;
 let rowHeight = viewPortHeight / ROW_COUNT;
