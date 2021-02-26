@@ -2,6 +2,11 @@ import mainView from './views/mainview.js';
 import gameView from './views/gameview.js';
 import controlView from './views/controlview.js';
 import leaderboardView from './views/leaderboardview.js';
+import GameBrain from './model/gamebrain.js';
+import GameController from './controllers/gamecontroller.js';
+
+let gameBrain = new GameBrain();
+let gameController = new GameController();
 
 let leaderboard = leaderboardView();
 let game = gameView();
@@ -13,17 +18,15 @@ function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
             v = view.querySelector('#view-leaderboard');
-            if (v !== null) {
-                v.remove();
-                view.append(game);
-            }
+            v.remove();
+            let gameHtlm = gameController.getBoardHtlm(gameBrain);
+            game.append(gameHtlm)
+            view.append(game);
             break;
         case 'leaderboard':
             v = view.querySelector('#view-game');
-            if (v !== null) {
             v.remove();
             view.append(leaderboard);
-            }
             break;
         default:
             break;
