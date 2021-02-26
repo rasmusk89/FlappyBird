@@ -1,3 +1,91 @@
+import mainView from './views/mainview.js';
+import gameView from './views/gameview.js';
+import controlView from './views/controlview.js';
+import leaderboardView from './views/leaderboardview.js';
+
+let leaderboard = leaderboardView();
+let game = gameView();
+let view = mainView();
+
+function gameControlClick(e) {
+    console.log(e);
+    let v;
+    switch (e.target.id) {
+        case 'game':
+            v = view.querySelector('#view-leaderboard');
+            if (v !== null) {
+                v.remove();
+                view.append(game);
+            }
+            break;
+        case 'leaderboard':
+            v = view.querySelector('#view-game');
+            if (v !== null) {
+            v.remove();
+            view.append(leaderboard);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+let control = controlView(gameControlClick);
+
+view.append(control);
+view.append(leaderboard);
+
+document.body.append(view);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 const ROW_COUNT = 40;
 const COL_COUNT = 60;
 
@@ -11,7 +99,7 @@ document.body.style = 'margin: 0; padding: 0';
 
 let gameBoard = document.createElement('div'); // game board Div
 
-function randomIntFromTo(min, max) { // min and max included 
+function randomIntFromTo(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -31,7 +119,7 @@ function createColumn(colIndex) {
         if (colIndex % Math.floor(COL_COUNT / 6 * 2) == 0) {
             createObstacle(10, rowIndex, rowElement, randomTop);
         } else {
-            createEdges(rowIndex, rowElement);        
+            createEdges(rowIndex, rowElement);
         }
         colElement.append(rowElement);
     }
@@ -56,7 +144,7 @@ function createMovingObstacle(spaceBetween, rowIndex, rowElement, randomTop) {
     if (rowIndex < randomTop || rowIndex > randomTop + spaceBetween) { // create obstacle
         rowElement.style.backgroundColor = '#FF00FF'
         setInterval(() => {
-            
+
         }, 100);
     }
 }
@@ -90,3 +178,4 @@ function moveScreen() {
 }
 
 // moveScreen()
+*/
