@@ -1,24 +1,34 @@
+import { gameCellBird } from "../model/gamebrain";
+
 export default class GameController {
 
     constructor(model, viewContainer) {
         this.model = model;
         this.viewContainer = viewContainer
         this.isRunning = false;
+        /*
+        this.interval = setInterval(() => {
+            this.run()
+        }, 1000);     
+    */
     }
 
-
+       
     run() {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
-        this.viewContainer.append(this.getBoardHtlm(this.model));
+        this.model.moveBoard(this.model.getGameBoard());
+        let content = this.getBoardHtlm(this.model)
+        this.viewContainer.append(content);
     }
 
     stop() {
         this.isRunning = false;
-    }
+        clearInterval(this.interval)
+   }
 
     resizeUi() {
-        if(this.isRunning) {
+        if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.viewContainer.append(this.getBoardHtlm(this.model));
         }
@@ -29,7 +39,7 @@ export default class GameController {
         let content = document.createElement('div');
         content.id = 'gameboard';
 
-        let colWidth =  window.innerWidth / this.model.columnCount - 1;
+        let colWidth = window.innerWidth / this.model.columnCount - 1;
         let rowHeight = window.innerHeight / this.model.rowCount - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
@@ -43,6 +53,9 @@ export default class GameController {
                 if (rowData !== gameBrain.gameCellPath()) {
                     rowElement.style.backgroundColor = '#00F';
                 }
+                if (rowData === gameBrain.gameCellBird()) {
+                    rowElement.style.backgroundColor = '#F00';
+                }
 
                 rowElement.style.minHeight = rowHeight + 'px';
                 rowElement.style.maxHeight = rowHeight + 'px';
@@ -53,7 +66,6 @@ export default class GameController {
             content.append(columnElement)
 
         });
-        // console.log(content)
 
         return content;
     };

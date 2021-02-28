@@ -8,6 +8,7 @@ class GameScore {
 export const gameCellPath = 0;
 export const gameCellTop = 1;
 export const gameCellBottom = -1;
+export const gameCellBird = 2;
 
 
 export default class GameBrain {
@@ -17,16 +18,34 @@ export default class GameBrain {
         this.columnCount = columnCount;
 
         this.scoreBoard = [];
-        this.gameBoard = [];
+        this.gameBoard = this.createGameBoard();
 
-        this.initializeBoard();
+    }
+
+    insertBirdOnBoard(board) {
+        if(board[0][this.rowCount/2] == gameCellBird) {
+            board[0][this.rowCount/2] = gameCellPath;
+        }
+        board[1][this.rowCount/2] = gameCellBird;
+        return board;
+    }
+
+    moveBirdUp() {
+        let birdIndex;
+        for (let index = 0; index < this.rowCount; index++) {
+            if (this.gameBoard[1][index] === gameCellBird) {
+                birdIndex = index;
+            }
+        }
+        if(birdIndex !== null) {
+            this.gameBoard[1][birdIndex] = gameCellPath;
+            this.gameBoard[1][birdIndex - 1] = gameCellBird;
+        }
     }
 
     createGameColumnWithObstacle(spaceBetween) {
         let top = this.rowCount / 2 - spaceBetween / 2;
-        console.log(top)
         let bottom = this.rowCount / 2 + spaceBetween / 2;
-        console.log(bottom)
         let res = [];
         for (let index = 0; index < this.rowCount; index++) {
             if (index < top) {
@@ -58,28 +77,34 @@ export default class GameBrain {
         return res;
     }
 
-    initializeBoard() {
+    createGameBoard() {
+        let board = [];
         for (let index = 0; index < this.columnCount; index++) {
-           if(index % 5 == 0) {
-            this.gameBoard.push(this.createGameColumnWithObstacle(2))
-
-           }
-           else {
-            this.gameBoard.push(this.createGameColumn())
-
-           }
-            
+            if (index % 5 == 0) {
+                board.push(this.createGameColumnWithObstacle(2))
+            }
+            else {
+                board.push(this.createGameColumn())
+            }
         }
+        return this.insertBirdOnBoard(board);
+    }
+
+    moveBoard() {
+        this.gameBoard.shift();
+        this.insertBirdOnBoard(this.gameBoard)
+        this.gameBoard.push(this.createGameColumnWithObstacle(2));
+
     }
 
     getGameBoard() {
-        return this.gameBoard;
+        return this.gameBoard
     }
 
     gameCellPath() { return gameCellPath };
     gameCellTop() { return gameCellTop };
     gameCellBottom() { return gameCellBottom };
-    gameCellObstacle() { return gameCellObstacle };
+    gameCellBird() { return gameCellBird };
 
 
 }
