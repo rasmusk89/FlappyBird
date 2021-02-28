@@ -1,9 +1,9 @@
 export default function gameView() {
     
     let content = document.createElement('div');
-    content.id = 'view-game';
+    content.id = 'view-container';
 
-    content.innerHTML = 'GAME';
+    content.innerHTML = 'CONTAINER';
 
     return content;
 }

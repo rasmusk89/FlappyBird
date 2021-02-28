@@ -1,16 +1,12 @@
-export default class GameController {
-
+export default class LeaderboardController {
     constructor(model, viewContainer) {
         this.model = model;
-        this.viewContainer = viewContainer
+        this.viewContainer = viewContainer;
     }
 
-    
     run() {
-        // draw the initial gameboard, start the game.
         this.viewContainer.innerHTML = '';
         this.viewContainer.append(this.getBoardHtlm(this.model));
-
     }
 
     getBoardHtlm(gameBrain) {
@@ -29,7 +25,7 @@ export default class GameController {
             columnData.forEach(rowData => {
                 let rowElement = document.createElement('div');
                 if (rowData === gameBrain.gameCellTop() || rowData === gameBrain.gameCellBottom()) {
-                    rowElement.style.backgroundColor = '#00F';
+                    rowElement.style.backgroundColor = '#F00';
                 }
 
                 rowElement.style.minHeight = rowHeight + 'px';
@@ -45,4 +41,6 @@ export default class GameController {
         
         return content;
     };
+
+
 }

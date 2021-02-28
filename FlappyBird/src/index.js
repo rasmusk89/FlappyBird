@@ -1,44 +1,36 @@
 import mainView from './views/mainview.js';
 import gameView from './views/gameview.js';
 import controlView from './views/controlview.js';
-import leaderboardView from './views/leaderboardview.js';
 import GameBrain from './model/gamebrain.js';
 import GameController from './controllers/gamecontroller.js';
+import LeaderboardController from './controllers/leaderboardcontroller.js';
+
+let view = mainView();
+document.body.append(view);
+let ctrl_view = controlView(gameControlClick);
+let game_view = gameView();
+view.append(ctrl_view);
+view.append(game_view);
 
 let gameBrain = new GameBrain();
-let gameController = new GameController();
-
-let leaderboard = leaderboardView();
-let game = gameView();
-let view = mainView();
+let gameController = new GameController(gameBrain, game_view);
+let leaderboardController = new LeaderboardController(gameBrain, game_view);
 
 function gameControlClick(e) {
-    console.log(e);
-    let v;
     switch (e.target.id) {
         case 'game':
-            v = view.querySelector('#view-leaderboard');
-            v.remove();
-            let gameHtlm = gameController.getBoardHtlm(gameBrain);
-            game.append(gameHtlm)
-            view.append(game);
+            gameController.run();
             break;
-        case 'leaderboard':
-            v = view.querySelector('#view-game');
-            v.remove();
-            view.append(leaderboard);
+        case 'leaderboard':           
+            leaderboardController.run();
             break;
         default:
             break;
     }
 }
+leaderboardController.run();
 
-let control = controlView(gameControlClick);
 
-view.append(control);
-view.append(leaderboard);
-
-document.body.append(view);
 
 
 
