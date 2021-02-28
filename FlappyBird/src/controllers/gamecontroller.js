@@ -1,19 +1,11 @@
-import { gameCellBird } from "../model/gamebrain";
-
 export default class GameController {
 
     constructor(model, viewContainer) {
         this.model = model;
         this.viewContainer = viewContainer
         this.isRunning = false;
-        /*
-        this.interval = setInterval(() => {
-            this.run()
-        }, 1000);     
-    */
     }
 
-       
     run() {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
@@ -24,8 +16,7 @@ export default class GameController {
 
     stop() {
         this.isRunning = false;
-        clearInterval(this.interval)
-   }
+    }
 
     resizeUi() {
         if (this.isRunning) {
@@ -33,7 +24,6 @@ export default class GameController {
             this.viewContainer.append(this.getBoardHtlm(this.model));
         }
     }
-
 
     getBoardHtlm(gameBrain) {
         let content = document.createElement('div');

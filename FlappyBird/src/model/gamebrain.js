@@ -16,6 +16,7 @@ export default class GameBrain {
     constructor(rowCount = 20, columnCount = 30) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
+        this.score = new GameScore();
 
         this.scoreBoard = [];
         this.gameBoard = this.createGameBoard();
@@ -23,10 +24,10 @@ export default class GameBrain {
     }
 
     insertBirdOnBoard(board) {
-        if(board[0][this.rowCount/2] == gameCellBird) {
-            board[0][this.rowCount/2] = gameCellPath;
+        if (board[0][this.rowCount / 2] == gameCellBird) {
+            board[0][this.rowCount / 2] = gameCellPath;
         }
-        board[1][this.rowCount/2] = gameCellBird;
+        board[1][this.rowCount / 2] = gameCellBird;
         return board;
     }
 
@@ -37,15 +38,15 @@ export default class GameBrain {
                 birdIndex = index;
             }
         }
-        if(birdIndex !== null) {
+        if (birdIndex !== null) {
             this.gameBoard[1][birdIndex] = gameCellPath;
             this.gameBoard[1][birdIndex - 1] = gameCellBird;
         }
     }
 
     createGameColumnWithObstacle(spaceBetween) {
-        let top = this.rowCount / 2 - spaceBetween / 2;
-        let bottom = this.rowCount / 2 + spaceBetween / 2;
+        let top = this.randomIntFromTo(1, this.rowCount - 2 - spaceBetween);
+        let bottom = top + spaceBetween;
         let res = [];
         for (let index = 0; index < this.rowCount; index++) {
             if (index < top) {
@@ -76,7 +77,7 @@ export default class GameBrain {
         }
         return res;
     }
-
+    
     createGameBoard() {
         let board = [];
         for (let index = 0; index < this.columnCount; index++) {
@@ -93,8 +94,19 @@ export default class GameBrain {
     moveBoard() {
         this.gameBoard.shift();
         this.insertBirdOnBoard(this.gameBoard)
-        this.gameBoard.push(this.createGameColumnWithObstacle(2));
+        if(this.score.score % 5 == 0) {
+            this.gameBoard.push(this.createGameColumnWithObstacle(2));
+        } else {
+            this.gameBoard.push(this.createGameColumn());
 
+        }
+
+        this.score.score++;
+
+    }
+
+    randomIntFromTo(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     getGameBoard() {

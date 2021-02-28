@@ -38,7 +38,7 @@ function logMouseButton(e) {
     if (typeof e === 'object') {
         switch (e.button) {
             case 0:
-                gameController.model.moveBirdUp();
+                gameController.stop();
                 console.log('Left button clicked.');
                 break;
             default:
