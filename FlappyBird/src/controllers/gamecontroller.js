@@ -3,22 +3,34 @@ export default class GameController {
     constructor(model, viewContainer) {
         this.model = model;
         this.viewContainer = viewContainer
+        this.isRunning = false;
     }
 
-    
+
     run() {
-        // draw the initial gameboard, start the game.
+        this.isRunning = true;
         this.viewContainer.innerHTML = '';
         this.viewContainer.append(this.getBoardHtlm(this.model));
-
     }
+
+    stop() {
+        this.isRunning = false;
+    }
+
+    resizeUi() {
+        if(this.isRunning) {
+            this.viewContainer.innerHTML = '';
+            this.viewContainer.append(this.getBoardHtlm(this.model));
+        }
+    }
+
 
     getBoardHtlm(gameBrain) {
         let content = document.createElement('div');
         content.id = 'gameboard';
 
-        let colWidth = 20;
-        let rowHeight = 20;
+        let colWidth =  window.innerWidth / this.model.columnCount - 1;
+        let rowHeight = window.innerHeight / this.model.rowCount - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
             let columnElement = document.createElement('div');
@@ -28,7 +40,7 @@ export default class GameController {
 
             columnData.forEach(rowData => {
                 let rowElement = document.createElement('div');
-                if (rowData === gameBrain.gameCellTop() || rowData === gameBrain.gameCellBottom()) {
+                if (rowData !== gameBrain.gameCellPath()) {
                     rowElement.style.backgroundColor = '#00F';
                 }
 
@@ -42,7 +54,7 @@ export default class GameController {
 
         });
         // console.log(content)
-        
+
         return content;
     };
 }

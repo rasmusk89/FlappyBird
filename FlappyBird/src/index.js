@@ -19,18 +19,24 @@ let leaderboardController = new LeaderboardController(gameBrain, game_view);
 function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
+            leaderboardController.stop();
             gameController.run();
             break;
-        case 'leaderboard':           
+        case 'leaderboard':
+            gameController.stop();
             leaderboardController.run();
             break;
         default:
             break;
     }
 }
+
 leaderboardController.run();
 
-
+window.addEventListener('resize', () => {
+    gameController.resizeUi();
+    leaderboardController.resizeUi();
+})
 
 
 

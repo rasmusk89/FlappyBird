@@ -2,19 +2,32 @@ export default class LeaderboardController {
     constructor(model, viewContainer) {
         this.model = model;
         this.viewContainer = viewContainer;
+        this.isRunning = false;
     }
 
     run() {
+        this.isRunning = true;
         this.viewContainer.innerHTML = '';
         this.viewContainer.append(this.getBoardHtlm(this.model));
     }
 
+    stop() {
+        this.isRunning = false;
+    }
+
+    resizeUi() {
+        if(this.isRunning) {
+            this.viewContainer.innerHTML = '';
+            this.viewContainer.append(this.getBoardHtlm(this.model));
+        }
+    }
+
     getBoardHtlm(gameBrain) {
         let content = document.createElement('div');
-        content.id = 'gameboard';
+        content.id = 'leaderboard';
 
-        let colWidth = 20;
-        let rowHeight = 20;
+        let colWidth =  window.innerWidth / this.model.columnCount - 1;
+        let rowHeight = window.innerHeight / this.model.rowCount - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
             let columnElement = document.createElement('div');
