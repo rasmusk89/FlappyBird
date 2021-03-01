@@ -14,8 +14,19 @@ export default class GameController {
         this.viewContainer.append(content);
     }
 
+    runWithInterval() {
+        setInterval(() => {
+            this.isRunning = true;
+            this.viewContainer.innerHTML = '';
+            this.model.moveBoard(this.model.getGameBoard());
+            let content = this.getBoardHtlm(this.model)
+            this.viewContainer.append(content);
+        }, 100);
+    }
+
     stop() {
         this.isRunning = false;
+
     }
 
     resizeUi() {
@@ -60,7 +71,7 @@ export default class GameController {
         return content;
     };
 
-    moveBirdUp(){
+    moveBirdUp() {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
         this.model.moveBirdUp(this.model.getGameBoard());

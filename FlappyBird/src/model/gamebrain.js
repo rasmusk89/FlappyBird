@@ -23,11 +23,14 @@ export default class GameBrain {
 
     }
 
-    insertBirdOnBoard(board) {
-        if (board[0][this.rowCount / 2] == gameCellBird) {
-            board[0][this.rowCount / 2] = gameCellPath;
+    insertBirdOnBoard(board, birdIndex=this.rowCount / 2) {
+        if (board[0][birdIndex] == gameCellBird) {
+            board[0][birdIndex] = gameCellPath;
         }
-        board[1][this.rowCount / 2] = gameCellBird;
+        else if (board[1][birdIndex] == gameCellBird) {
+            board[1][birdIndex] = gameCellPath;
+        }
+        board[1][birdIndex] = gameCellBird;
         return board;
     }
 
@@ -105,8 +108,10 @@ export default class GameBrain {
     }
 
     moveBoard() {
+        let birdIndex = this.getBirdPosition(this.gameBoard)
+        console.log(birdIndex)
         this.gameBoard.shift();
-        this.insertBirdOnBoard(this.gameBoard)
+        this.insertBirdOnBoard(this.gameBoard, birdIndex)
         if(this.score.score % 5 == 0) {
             this.gameBoard.push(this.createGameColumnWithObstacle(2));
         } else {
@@ -116,6 +121,16 @@ export default class GameBrain {
 
         this.score.score++;
 
+    }
+
+    getBirdPosition(board) {
+        let birdIndex;
+        for (let index = 0; index < this.rowCount; index++) {
+            if (board[1][index] === gameCellBird) {
+                birdIndex = index;
+            }
+        }
+        return birdIndex;
     }
 
     randomIntFromTo(min, max) {

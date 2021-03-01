@@ -8,7 +8,7 @@ import LeaderboardController from './controllers/leaderboardcontroller.js';
 let view = mainView();
 document.body.append(view);
 let ctrl_view = controlView(gameControlClick);
-let game_view = gameView(makeAMove);
+let game_view = gameView(gameMoveKeyDown);
 view.append(ctrl_view);
 view.append(game_view);
 
@@ -20,7 +20,8 @@ function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
             leaderboardController.stop();
-            gameController.run();
+            gameController.runWithInterval();
+            // gameController.run();
             break;
         case 'leaderboard':
             gameController.stop();
@@ -34,7 +35,7 @@ function gameControlClick(e) {
     }
 }
 
-function makeAMove(event) {
+function gameMoveKeyDown(event) {
     if(event.key === 'ArrowUp' || event.key === 'w') {
         gameController.moveBirdUp();
         

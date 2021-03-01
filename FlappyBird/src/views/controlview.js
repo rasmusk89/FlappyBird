@@ -2,7 +2,7 @@ export default function controlView(eventHandler) {
 
     let control = document.createElement('div');
     control.id = 'control';
-
+    
     let leaderboardButton = document.createElement('button');
     leaderboardButton.id = 'leaderboard';
     leaderboardButton.innerHTML = 'Leaderboard';
