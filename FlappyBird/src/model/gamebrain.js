@@ -97,8 +97,8 @@ export default class GameBrain {
     createGameBoard() {
         let board = [];
         for (let index = 0; index < this.columnCount; index++) {
-            if (index % 5 == 0) {
-                board.push(this.createGameColumnWithObstacle(2))
+            if (index % 10 == 0) {
+                board.push(this.createGameColumnWithObstacle(5))
             }
             else {
                 board.push(this.createGameColumn())
@@ -109,11 +109,10 @@ export default class GameBrain {
 
     moveBoard() {
         let birdIndex = this.getBirdPosition(this.gameBoard)
-        console.log(birdIndex)
         this.gameBoard.shift();
         this.insertBirdOnBoard(this.gameBoard, birdIndex)
-        if(this.score.score % 5 == 0) {
-            this.gameBoard.push(this.createGameColumnWithObstacle(2));
+        if(this.score.score % 10 == 0) {
+            this.gameBoard.push(this.createGameColumnWithObstacle(5));
         } else {
             this.gameBoard.push(this.createGameColumn());
 
