@@ -8,7 +8,7 @@ import LeaderboardController from './controllers/leaderboardcontroller.js';
 let view = mainView();
 document.body.append(view);
 let ctrl_view = controlView(gameControlClick);
-let game_view = gameView(logMouseButton);
+let game_view = gameView(makeAMove);
 view.append(ctrl_view);
 view.append(game_view);
 
@@ -34,17 +34,19 @@ function gameControlClick(e) {
     }
 }
 
-function logMouseButton(e) {
-    if (typeof e === 'object') {
-        switch (e.button) {
-            case 0:
-                gameController.stop();
-                console.log('Left button clicked.');
-                break;
-            default:
-                console.log(`Unknown button code: ${e.button}`);
-        }
+function makeAMove(event) {
+    if(event.key === 'ArrowUp' || event.key === 'w') {
+        gameController.moveBirdUp();
+        
+        console.log('UP');
     }
+    if(event.key === 'ArrowDown' || event.key === 's') {
+        gameController.moveBirdDown();
+        console.log('DOWN');
+        
+    }
+    
+
 }
 
 leaderboardController.run();

@@ -38,9 +38,22 @@ export default class GameBrain {
                 birdIndex = index;
             }
         }
-        if (birdIndex !== null) {
+        if (birdIndex !== null && birdIndex > 1) {
             this.gameBoard[1][birdIndex] = gameCellPath;
             this.gameBoard[1][birdIndex - 1] = gameCellBird;
+        }
+    }
+
+    moveBirdDown() {
+        let birdIndex;
+        for (let index = 0; index < this.rowCount; index++) {
+            if (this.gameBoard[1][index] === gameCellBird) {
+                birdIndex = index;
+            }
+        }
+        if (birdIndex !== null && birdIndex < this.rowCount - 2) {
+            this.gameBoard[1][birdIndex] = gameCellPath;
+            this.gameBoard[1][birdIndex + 1] = gameCellBird;
         }
     }
 
