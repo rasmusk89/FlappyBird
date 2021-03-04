@@ -4,6 +4,8 @@ export default class GameController {
         this.model = model;
         this.viewContainer = viewContainer
         this.isRunning = false;
+        
+        this.run
     }
 
     run() {
@@ -15,7 +17,8 @@ export default class GameController {
     }
 
     runWithInterval() {
-        setInterval(() => {
+        this.isRunning = true;
+        this.run = setInterval(() => {
             this.isRunning = true;
             this.viewContainer.innerHTML = '';
             this.model.moveBoard(this.model.getGameBoard());
@@ -26,6 +29,8 @@ export default class GameController {
 
     stop() {
         this.isRunning = false;
+        clearInterval(this.run);
+
 
     }
 
@@ -72,19 +77,21 @@ export default class GameController {
     };
 
     moveBirdUp() {
-        this.isRunning = true;
-        this.viewContainer.innerHTML = '';
-        this.model.moveBirdUp(this.model.getGameBoard());
-        let content = this.getBoardHtlm(this.model)
-        this.viewContainer.append(content);
+        if(this.isRunning) {
+            this.viewContainer.innerHTML = '';
+            this.model.moveBirdUp(this.model.getGameBoard());
+            let content = this.getBoardHtlm(this.model)
+            this.viewContainer.append(content);
+        }        
     }
 
     moveBirdDown() {
-        this.isRunning = true;
-        this.viewContainer.innerHTML = '';
-        this.model.moveBirdDown(this.model.getGameBoard());
-        let content = this.getBoardHtlm(this.model)
-        this.viewContainer.append(content);
+        if (this.isRunning) {
+            this.viewContainer.innerHTML = '';
+            this.model.moveBirdDown(this.model.getGameBoard());
+            let content = this.getBoardHtlm(this.model)
+            this.viewContainer.append(content);
+        }        
     }
 
 }
