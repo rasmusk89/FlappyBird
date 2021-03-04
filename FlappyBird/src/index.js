@@ -20,7 +20,7 @@ function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
             leaderboardController.stop();
-            gameController.runWithInterval();
+            gameController.runForFiveSeconds();
             // gameController.run();
             break;
         case 'leaderboard':

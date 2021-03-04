@@ -4,21 +4,13 @@ export default class GameController {
         this.model = model;
         this.viewContainer = viewContainer
         this.isRunning = false;
-        
-        this.run
+
+        this.runGame;
     }
 
     run() {
         this.isRunning = true;
-        this.viewContainer.innerHTML = '';
-        this.model.moveBoard(this.model.getGameBoard());
-        let content = this.getBoardHtlm(this.model)
-        this.viewContainer.append(content);
-    }
-
-    runWithInterval() {
-        this.isRunning = true;
-        this.run = setInterval(() => {
+        this.runGame = setInterval(() => {
             this.isRunning = true;
             this.viewContainer.innerHTML = '';
             this.model.moveBoard(this.model.getGameBoard());
@@ -27,11 +19,16 @@ export default class GameController {
         }, 100);
     }
 
+    runForFiveSeconds() {
+        this.run()
+        setTimeout(() => {
+            this.stop()
+        }, 5000);
+    }
+
     stop() {
         this.isRunning = false;
-        clearInterval(this.run);
-
-
+        clearInterval(this.runGame);
     }
 
     resizeUi() {
@@ -77,12 +74,12 @@ export default class GameController {
     };
 
     moveBirdUp() {
-        if(this.isRunning) {
+        if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.model.moveBirdUp(this.model.getGameBoard());
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
-        }        
+        }
     }
 
     moveBirdDown() {
@@ -91,7 +88,7 @@ export default class GameController {
             this.model.moveBirdDown(this.model.getGameBoard());
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
-        }        
+        }
     }
 
 }
