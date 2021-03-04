@@ -19,9 +19,11 @@ let leaderboardController = new LeaderboardController(gameBrain, game_view);
 function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
+            gameController.isPaused = false;           
             leaderboardController.stop();
             if (!gameController.isRunning) {
                 gameController.run();
+               
             }
             // gameController.run();
             break;
@@ -30,8 +32,22 @@ function gameControlClick(e) {
             leaderboardController.run();
             break;
         case 'stop':
-            gameController.stop();
+            if (gameController.isRunning) {
+                let stop = confirm('Are you sure you want to stop?')
+                if(stop) {
+                    gameController.stop();
+                    leaderboardController.run()
+                }
+                else{
+                    if (!gameController.isRunning) {
+                        gameController.run();
+                    }
+                }      
+            }
             break;
+        case 'pause':
+            gameController.isPaused = true;
+            gameController.stop();
         default:
             break;
     }

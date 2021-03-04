@@ -15,13 +15,21 @@ export default function controlView(eventHandler) {
     stopButton.id = 'stop'
     stopButton.innerHTML = 'Stop';
 
+    let pauseBtton = document.createElement('button');
+    pauseBtton.id = 'pause'
+    pauseBtton.innerHTML = 'Pause';
+
     control.append(leaderboardButton);
     control.append(gameButton);
     control.append(stopButton);
+    control.append(pauseBtton);
+
 
     leaderboardButton.addEventListener('click', eventHandler);
     gameButton.addEventListener('click', eventHandler);
     stopButton.addEventListener('click', eventHandler);
+    pauseBtton.addEventListener('click', eventHandler);
+
 
 
     return control;

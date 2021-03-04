@@ -4,8 +4,10 @@ export default class GameController {
         this.model = model;
         this.viewContainer = viewContainer
         this.isRunning = false;
+        this.isPaused = false;
 
         this.runGame = {};
+
     }
 
     run() {
@@ -92,5 +94,15 @@ export default class GameController {
             this.viewContainer.append(content);
         }
     }
+
+    flapBird() {
+        setInterval(() => {
+            this.viewContainer.innerHTML = '';
+            this.model.flapBird();
+            let content = this.getBoardHtlm(this.model)
+            this.viewContainer.append(content);
+        }, 300);
+    }
+
 
 }
