@@ -19,8 +19,7 @@ export default class GameBrain {
         this.score = new GameScore();
 
         this.scoreBoard = [];
-        this.gameBoard = this.createGameBoard();
-
+        this.gameBoard = this.createGameBoard()
     }
 
     insertBirdOnBoard(board, birdIndex = this.rowCount / 2) {

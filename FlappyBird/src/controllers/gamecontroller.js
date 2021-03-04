@@ -5,10 +5,11 @@ export default class GameController {
         this.viewContainer = viewContainer
         this.isRunning = false;
 
-        this.runGame;
+        this.runGame = {};
     }
 
     run() {
+        this.viewContainer.focus();
         this.isRunning = true;
         this.runGame = setInterval(() => {
             this.isRunning = true;
@@ -29,6 +30,7 @@ export default class GameController {
     stop() {
         this.isRunning = false;
         clearInterval(this.runGame);
+        this.runGame = {};
     }
 
     resizeUi() {

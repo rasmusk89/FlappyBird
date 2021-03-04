@@ -20,7 +20,9 @@ function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
             leaderboardController.stop();
-            gameController.runForFiveSeconds();
+            if (!gameController.isRunning) {
+                gameController.run();
+            }
             // gameController.run();
             break;
         case 'leaderboard':
