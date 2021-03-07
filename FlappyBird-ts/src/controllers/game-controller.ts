@@ -1,5 +1,13 @@
-export default class GameController {
+import GameBrain from "../model/game-brain";
 
+export default class GameController {
+    private model: GameBrain = new GameBrain();
+    private viewContainer: any; // Check the type!
+    public isRunning: boolean = false;
+    public isPaused: boolean = false;
+    private runGame: any = {}; // Check the type!
+
+    /*
     constructor(model, viewContainer) {
         this.model = model;
         this.viewContainer = viewContainer
@@ -9,14 +17,15 @@ export default class GameController {
         this.runGame = {};
 
     }
-
+*/
     run() {
         this.viewContainer.focus();
         this.isRunning = true;
         this.runGame = setInterval(() => {
             this.isRunning = true;
             this.viewContainer.innerHTML = '';
-            this.model.moveBoard(this.model.getGameBoard());
+            // this.model.moveBoard(this.model.getGameBoard());
+            this.model.moveBoard();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }, 100);
@@ -42,12 +51,12 @@ export default class GameController {
         }
     }
 
-    getBoardHtlm(gameBrain) {
+    getBoardHtlm(gameBrain: GameBrain) {
         let content = document.createElement('div');
         content.id = 'gameboard';
 
-        let colWidth = window.innerWidth / this.model.columnCount - 1;
-        let rowHeight = window.innerHeight / this.model.rowCount - 1;
+        let colWidth = window.innerWidth / this.model.getColumnCount() - 1;
+        let rowHeight = window.innerHeight / this.model.getRowCount() - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
             let columnElement = document.createElement('div');
@@ -80,7 +89,8 @@ export default class GameController {
     moveBirdUp() {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            this.model.moveBirdUp(this.model.getGameBoard());
+            // this.model.moveBirdUp(this.model.getGameBoard());
+            this.model.moveBirdUp();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
@@ -89,12 +99,14 @@ export default class GameController {
     moveBirdDown() {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            this.model.moveBirdDown(this.model.getGameBoard());
+            // this.model.moveBirdDown(this.model.getGameBoard());
+            this.model.moveBirdDown();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
     }
 
+    /*
     flapBird() {
         setInterval(() => {
             this.viewContainer.innerHTML = '';
@@ -103,6 +115,7 @@ export default class GameController {
             this.viewContainer.append(content);
         }, 300);
     }
+    */
 
 
 }

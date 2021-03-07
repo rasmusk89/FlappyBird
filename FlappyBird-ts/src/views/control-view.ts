@@ -1,4 +1,4 @@
-export default function controlView(eventHandler) {
+export default function controlView(eventHandler: any) { // CHANGE EVENTHANDLER TYPE!
 
     let control = document.createElement('div');
     control.id = 'control';

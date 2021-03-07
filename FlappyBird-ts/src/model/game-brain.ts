@@ -1,18 +1,30 @@
 class GameScore {
+    public name = '';
+    public score = 0;
+
+    /*
     constructor() {
         this.name = '';
         this.score = 0;
     }
+    */
 }
 
-export const gameCellPath = 0;
-export const gameCellTop = 1;
-export const gameCellBottom = -1;
-export const gameCellBird = 2;
+export const gameCellPath: number = 0;
+export const gameCellTop: number = 1;
+export const gameCellBottom: number = -1;
+export const gameCellBird: number = 2;
 
 
 export default class GameBrain {
 
+    private rowCount: number = 20;
+    private columnCount: number = 30;
+    private score: GameScore = new GameScore();
+    private scoreBoard: number[] = [];
+    private gameBoard: number[][] = this.createGameBoard();
+
+    /*
     constructor(rowCount = 20, columnCount = 30) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
@@ -20,10 +32,18 @@ export default class GameBrain {
 
         this.scoreBoard = [];
         this.gameBoard = this.createGameBoard()
+    }
+    */
 
+    getColumnCount() {
+        return this.columnCount;
     }
 
-    insertBirdOnBoard(board, birdIndex=this.rowCount / 2) {
+    getRowCount() {
+        return this.rowCount;
+    }
+
+    insertBirdOnBoard(board: number[][], birdIndex: number=this.rowCount / 2) {
         if(board[1][birdIndex] != gameCellPath) {
             alert('Game over!')
         }
@@ -38,8 +58,8 @@ export default class GameBrain {
     }
 
     moveBirdUp() {
-        let birdIndex;
-        for (let index = 0; index < this.rowCount; index++) {
+        let birdIndex = null;
+        for (let index:number = 0; index < this.rowCount; index++) {
             if (this.gameBoard[1][index] === gameCellBird) {
                 birdIndex = index;
             }
@@ -51,7 +71,7 @@ export default class GameBrain {
     }
 
     moveBirdDown() {
-        let birdIndex;
+        let birdIndex = null;
         for (let index = 0; index < this.rowCount; index++) {
             if (this.gameBoard[1][index] === gameCellBird) {
                 birdIndex = index;
@@ -63,7 +83,7 @@ export default class GameBrain {
         }
     }
 
-    createGameColumnWithObstacle(spaceBetween) {
+    createGameColumnWithObstacle(spaceBetween: number) {
         let top = this.randomIntFromTo(1, this.rowCount - 2 - spaceBetween);
         let bottom = top + spaceBetween;
         let res = [];
@@ -109,20 +129,18 @@ export default class GameBrain {
         }
         return this.insertBirdOnBoard(board);
     }
-
+    /*
     flapBird() {
-        let birdIndex = this.getBirdPosition(this.gameboard);
+        let birdIndex = this.getBirdPosition(this.gameBoard);
         this.gameBoard[1][birdIndex] == gameCellPath;
         this.gameBoard[1][birdIndex + 1] == gameCellBird
     }
+    */
 
     moveBoard() {
-        //        if (this.gameIsOver()) {
-        //          alert('Game over');
-        //    }
         let birdIndex = this.getBirdPosition(this.gameBoard)
         this.gameBoard.shift();
-        this.insertBirdOnBoard(this.gameBoard, birdIndex)
+        this.insertBirdOnBoard(this.gameBoard, birdIndex!)
         if (this.score.score % 10 == 0) {
             this.gameBoard.push(this.createGameColumnWithObstacle(5));
         } else {
@@ -133,7 +151,7 @@ export default class GameBrain {
 
     gameIsOver() {
         let birdIndex = this.getBirdPosition(this.gameBoard)
-        if (this.gameBoard[1][birdIndex + 1] !== gameCellPath) {
+        if (this.gameBoard[1][birdIndex! + 1] !== gameCellPath) {
             return true;
         }
         else {
@@ -141,9 +159,9 @@ export default class GameBrain {
         }
     }
 
-    getBirdPosition(board) {
-        let birdIndex;
-        for (let index = 0; index < this.rowCount; index++) {
+    getBirdPosition(board: number[][]) {
+        let birdIndex = null;
+        for (let index: number = 0; index < this.rowCount; index++) {
             if (board[1][index] === gameCellBird) {
                 birdIndex = index;
             }
@@ -151,7 +169,7 @@ export default class GameBrain {
         return birdIndex;
     }
 
-    randomIntFromTo(min, max) {
+    randomIntFromTo(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
