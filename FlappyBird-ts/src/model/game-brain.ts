@@ -1,19 +1,12 @@
 class GameScore {
     public name = '';
     public score = 0;
-
-    /*
-    constructor() {
-        this.name = '';
-        this.score = 0;
-    }
-    */
 }
 
-export const gameCellPath: number = 0;
-export const gameCellTop: number = 1;
-export const gameCellBottom: number = -1;
-export const gameCellBird: number = 2;
+const gameCellPath: number = 0;
+const gameCellTop: number = 1;
+const gameCellBottom: number = -1;
+const gameCellBird: number = 2;
 
 
 export default class GameBrain {
@@ -21,19 +14,8 @@ export default class GameBrain {
     private rowCount: number = 20;
     private columnCount: number = 30;
     private score: GameScore = new GameScore();
-    private scoreBoard: number[] = [];
+    // private scoreBoard: number[] = [];
     private gameBoard: number[][] = this.createGameBoard();
-
-    /*
-    constructor(rowCount = 20, columnCount = 30) {
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
-        this.score = new GameScore();
-
-        this.scoreBoard = [];
-        this.gameBoard = this.createGameBoard()
-    }
-    */
 
     getColumnCount() {
         return this.columnCount;

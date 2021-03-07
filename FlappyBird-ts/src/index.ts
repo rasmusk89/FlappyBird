@@ -13,11 +13,12 @@ view.append(ctrl_view);
 view.append(game_view);
 
 let gameBrain = new GameBrain();
-let gameController = new GameController();
-let leaderboardController = new LeaderboardController();
+let gameController = new GameController(gameBrain, game_view);
+let leaderboardController = new LeaderboardController(gameBrain, game_view);
 
-function gameControlClick(e: any) { // Check the type!
-    switch (e.target.id) {
+function gameControlClick(e: MouseEvent) { // Check the type!
+    
+    switch ((e.target as HTMLDivElement).id) {
         case 'game':
             gameController.isPaused = false;           
             leaderboardController.stop();
@@ -25,7 +26,6 @@ function gameControlClick(e: any) { // Check the type!
                 gameController.run();
                
             }
-            // gameController.run();
             break;
         case 'leaderboard':
             gameController.stop();
@@ -53,7 +53,7 @@ function gameControlClick(e: any) { // Check the type!
     }
 }
 
-function gameMoveKeyDown(event: any) { // Check the type!
+function gameMoveKeyDown(event: KeyboardEvent) {
     if(event.key === 'ArrowUp' || event.key === 'w') {
         gameController.moveBirdUp();
         

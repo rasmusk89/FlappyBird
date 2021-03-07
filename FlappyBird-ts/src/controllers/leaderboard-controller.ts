@@ -2,19 +2,14 @@ import GameBrain from "../model/game-brain";
 
 export default class LeaderboardController {
 
-    private model: GameBrain = new GameBrain();
-    private viewContainer: any; // Check the type!
+    private model: GameBrain;
+    private viewContainer: HTMLDivElement;
     private isRunning: boolean = false;
-    private isPaused: boolean = false;
-    private runGame: object = {};
 
-    /*
-    constructor(model, viewContainer) {
+    constructor(model: GameBrain, viewContainer: HTMLDivElement) {
         this.model = model;
         this.viewContainer = viewContainer;
-        this.isRunning = false;
     }
-    */
 
     run() {
         this.isRunning = true;
@@ -27,7 +22,7 @@ export default class LeaderboardController {
     }
 
     resizeUi() {
-        if(this.isRunning) {
+        if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.viewContainer.append(this.getBoardHtlm(this.model));
         }
@@ -37,7 +32,7 @@ export default class LeaderboardController {
         let content = document.createElement('div');
         content.id = 'leaderboard';
 
-        let colWidth =  window.innerWidth / this.model.getColumnCount() - 1;
+        let colWidth = window.innerWidth / this.model.getColumnCount() - 1;
         let rowHeight = window.innerHeight / this.model.getRowCount() - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
@@ -59,10 +54,7 @@ export default class LeaderboardController {
             });
 
             content.append(columnElement)
-
         });
-        // console.log(content)
-        
         return content;
     };
 

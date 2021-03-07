@@ -2,33 +2,29 @@ import GameBrain from "../model/game-brain";
 
 export default class GameController {
     private model: GameBrain = new GameBrain();
-    private viewContainer: any; // Check the type!
+    private viewContainer: HTMLDivElement;
     public isRunning: boolean = false;
     public isPaused: boolean = false;
     private runGame: any = {}; // Check the type!
 
-    /*
-    constructor(model, viewContainer) {
+    constructor(model: GameBrain, viewContainer: HTMLDivElement) {
         this.model = model;
         this.viewContainer = viewContainer
-        this.isRunning = false;
-        this.isPaused = false;
 
-        this.runGame = {};
 
     }
-*/
     run() {
         this.viewContainer.focus();
         this.isRunning = true;
         this.runGame = setInterval(() => {
             this.isRunning = true;
             this.viewContainer.innerHTML = '';
-            // this.model.moveBoard(this.model.getGameBoard());
             this.model.moveBoard();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
-        }, 100);
+        }, 200);
+        this.flapBird();
+
     }
 
     runForFiveSeconds() {
@@ -89,7 +85,6 @@ export default class GameController {
     moveBirdUp() {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            // this.model.moveBirdUp(this.model.getGameBoard());
             this.model.moveBirdUp();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
@@ -99,23 +94,18 @@ export default class GameController {
     moveBirdDown() {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            // this.model.moveBirdDown(this.model.getGameBoard());
             this.model.moveBirdDown();
             let content = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
     }
 
-    /*
     flapBird() {
         setInterval(() => {
-            this.viewContainer.innerHTML = '';
-            this.model.flapBird();
-            let content = this.getBoardHtlm(this.model)
-            this.viewContainer.append(content);
-        }, 300);
+            this.moveBirdDown();
+        }, 500);
     }
-    */
+
 
 
 }
