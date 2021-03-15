@@ -63,11 +63,6 @@ function gameMoveKeyDown(event) {
 
 leaderboardController.run();
 
-if (gameController.isGameOver) {
-    gameController.stop();
-    leaderboardController.run();
-}
-
 window.addEventListener('resize', () => {
     gameController.resizeUi();
     leaderboardController.resizeUi();

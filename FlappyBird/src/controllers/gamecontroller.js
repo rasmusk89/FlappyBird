@@ -6,6 +6,7 @@ export default class GameController {
         this.isRunning = false;
         this.isPaused = false;
         this.isGameOver = false;
+        this.gameSpeed = 100;
 
         this.runGame = {};
     }
@@ -24,7 +25,7 @@ export default class GameController {
             } else {
                 this.stopGame();
             }
-        }, 100);
+        }, this.gameSpeed);
 
     }
 
@@ -49,12 +50,14 @@ export default class GameController {
     stopGame() {
         this.isRunning = false;
         clearInterval(this.runGame);
-        let name = prompt('Your score is:' + this.model.score.score + '\nPlease enter your name: ')
+        this.runGame = {};
+
+        let name = prompt('Your score is:' + this.model.score.score +
+         '\nPlease enter your name: ', 'Player' + this.model.scoreBoard.length)
         let player = {};
         player.name = name;
         player.score = this.model.score.score;
         this.model.scoreBoard.push(player);
-        this.runGame = {};
         this.model.setNewGameBoard();
         let newScore = {};
         newScore.name = '';
