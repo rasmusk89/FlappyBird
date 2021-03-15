@@ -19,13 +19,12 @@ let leaderboardController = new LeaderboardController(gameBrain, game_view);
 function gameControlClick(e) {
     switch (e.target.id) {
         case 'game':
-            gameController.isPaused = false;           
+            gameController.isPaused = false;
             leaderboardController.stop();
             if (!gameController.isRunning) {
+
                 gameController.run();
-               
             }
-            // gameController.run();
             break;
         case 'leaderboard':
             gameController.stop();
@@ -34,15 +33,15 @@ function gameControlClick(e) {
         case 'stop':
             if (gameController.isRunning) {
                 let stop = confirm('Are you sure you want to stop?')
-                if(stop) {
+                if (stop) {
                     gameController.stop();
                     leaderboardController.run()
                 }
-                else{
+                else {
                     if (!gameController.isRunning) {
                         gameController.run();
                     }
-                }      
+                }
             }
             break;
         case 'pause':
@@ -54,21 +53,20 @@ function gameControlClick(e) {
 }
 
 function gameMoveKeyDown(event) {
-    if(event.key === 'ArrowUp' || event.key === 'w') {
+    if (event.key === 'ArrowUp' || event.key === 'w') {
         gameController.moveBirdUp();
-        
-        console.log('UP');
     }
-    if(event.key === 'ArrowDown' || event.key === 's') {
+    if (event.key === 'ArrowDown' || event.key === 's') {
         gameController.moveBirdDown();
-        console.log('DOWN');
-        
     }
-    
-
 }
 
 leaderboardController.run();
+
+if (gameController.isGameOver) {
+    gameController.stop();
+    leaderboardController.run();
+}
 
 window.addEventListener('resize', () => {
     gameController.resizeUi();

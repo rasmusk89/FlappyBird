@@ -9,6 +9,7 @@ export default class LeaderboardController {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
         this.viewContainer.append(this.createLeaderboardHtml(this.model));
+
     }
 
     stop() {
@@ -63,9 +64,6 @@ export default class LeaderboardController {
 
         content.append(table);
 
-
-        let leaderboard = gameBrain.getLeaderboard();
-        console.log('Leaderboard: ', leaderboard)
         return content;
     }
 

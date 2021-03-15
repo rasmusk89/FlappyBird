@@ -21,39 +21,15 @@ export default class GameBrain {
 
         this.scoreBoard = [];
         this.gameBoard = this.createGameBoard()
-
-        this.scoreBoard[0] = {
-            name: 'Rasmus',
-            score: 12
-        }
-
-        this.scoreBoard[1] = {
-            name: 'Anette',
-            score: 100
-        }
-
-        this.scoreBoard[2] = {
-            name: 'Robin',
-            score: 50
-        }
-
-        this.scoreBoard[3] = {
-            name: 'Mia',
-            score: 101
-        }
-
-        this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);
         
     }
 
-    getLeaderboard() {
-        return this.scoreBoard;
+    getLeaderboard() {        
+        return this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);;
     }
 
-    insertBirdOnBoard(board, birdIndex=this.rowCount / 2) {
-        if(board[1][birdIndex] != gameCellPath) {
-            alert('Game over!')
-        }
+
+    insertBirdOnBoard(board, birdIndex = this.rowCount / 2) {
         if (board[0][birdIndex] == gameCellBird) {
             board[0][birdIndex] = gameCellPath;
         }
@@ -62,6 +38,14 @@ export default class GameBrain {
         }
         board[1][birdIndex] = gameCellBird;
         return board;
+
+    }
+
+    isGameOver() {
+        if (this.gameBoard[2][this.getBirdPosition(this.gameBoard)] != gameCellPath) {
+            return true;
+        }
+        return false;
     }
 
     moveBirdUp() {
@@ -158,16 +142,6 @@ export default class GameBrain {
         this.score.score++;
     }
 
-    gameIsOver() {
-        let birdIndex = this.getBirdPosition(this.gameBoard)
-        if (this.gameBoard[1][birdIndex + 1] !== gameCellPath) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     getBirdPosition(board) {
         let birdIndex;
         for (let index = 0; index < this.rowCount; index++) {
@@ -184,6 +158,10 @@ export default class GameBrain {
 
     getGameBoard() {
         return this.gameBoard
+    }
+
+    setNewGameBoard() {
+        this.gameBoard = this.createGameBoard();
     }
 
     gameCellPath() { return gameCellPath };
