@@ -8,7 +8,7 @@ export default class LeaderboardController {
     run() {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
-        this.viewContainer.append(this.getBoardHtlm(this.model));
+        this.viewContainer.append(this.createLeaderboardHtml(this.model));
     }
 
     stop() {
@@ -16,44 +16,60 @@ export default class LeaderboardController {
     }
 
     resizeUi() {
-        if(this.isRunning) {
+        if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.viewContainer.append(this.getBoardHtlm(this.model));
         }
     }
 
-    getBoardHtlm(gameBrain) {
+    createLeaderboardHtml(gameBrain) {
         let content = document.createElement('div');
         content.id = 'leaderboard';
 
-        let colWidth =  window.innerWidth / this.model.columnCount - 1;
-        let rowHeight = window.innerHeight / this.model.rowCount - 1;
+        let table = document.createElement('table');
 
-        gameBrain.getGameBoard().forEach(columnData => {
-            let columnElement = document.createElement('div');
-            columnElement.style.minWidth = colWidth + 'px';
-            columnElement.style.maxWidth = colWidth + 'px';
-            columnElement.style.float = 'left';
+        let row = document.createElement('tr');
 
-            columnData.forEach(rowData => {
-                let rowElement = document.createElement('div');
-                if (rowData === gameBrain.gameCellTop() || rowData === gameBrain.gameCellBottom()) {
-                    rowElement.style.backgroundColor = '#F00';
-                }
 
-                rowElement.style.minHeight = rowHeight + 'px';
-                rowElement.style.maxHeight = rowHeight + 'px';
+        let headPosition = document.createElement('th');
+        headPosition.innerHTML = 'Position';
+        let headName = document.createElement('th');
+        headName.innerHTML = 'Name';
+        let headScore = document.createElement('th');
+        headScore.innerHTML = 'Score';
 
-                columnElement.append(rowElement);
-            });
+        row.append(headPosition);
+        row.append(headScore);
+        row.append(headName);
 
-            content.append(columnElement)
+        table.append(row);
+
+        gameBrain.getLeaderboard().forEach(function callback(value, index) {
+            let row = document.createElement('tr');
+            let position = document.createElement('td');
+            position.innerHTML = index + 1;
+            let name = document.createElement('td');
+            name.innerHTML = value.name;
+            let score = document.createElement('td');
+            score.innerHTML = value.score;
+
+            row.append(position);
+            row.append(score);
+            row.append(name);
+
+            table.append(row)
 
         });
-        // console.log(content)
-        
+
+        content.append(table);
+
+
+        let leaderboard = gameBrain.getLeaderboard();
+        console.log('Leaderboard: ', leaderboard)
         return content;
-    };
+    }
+
+
 
 
 }

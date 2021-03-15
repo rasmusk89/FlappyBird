@@ -3,6 +3,7 @@ class GameScore {
         this.name = '';
         this.score = 0;
     }
+
 }
 
 export const gameCellPath = 0;
@@ -21,6 +22,32 @@ export default class GameBrain {
         this.scoreBoard = [];
         this.gameBoard = this.createGameBoard()
 
+        this.scoreBoard[0] = {
+            name: 'Rasmus',
+            score: 12
+        }
+
+        this.scoreBoard[1] = {
+            name: 'Anette',
+            score: 100
+        }
+
+        this.scoreBoard[2] = {
+            name: 'Robin',
+            score: 50
+        }
+
+        this.scoreBoard[3] = {
+            name: 'Mia',
+            score: 101
+        }
+
+        this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);
+        
+    }
+
+    getLeaderboard() {
+        return this.scoreBoard;
     }
 
     insertBirdOnBoard(board, birdIndex=this.rowCount / 2) {
