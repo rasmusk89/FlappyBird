@@ -22,7 +22,6 @@ function gameControlClick(e) {
             gameController.isPaused = false;
             leaderboardController.stop();
             if (!gameController.isRunning) {
-
                 gameController.run();
             }
             break;

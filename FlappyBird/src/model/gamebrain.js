@@ -28,7 +28,6 @@ export default class GameBrain {
         return this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);;
     }
 
-
     insertBirdOnBoard(board, birdIndex = this.rowCount / 2) {
         if (board[0][birdIndex] == gameCellBird) {
             board[0][birdIndex] = gameCellPath;
@@ -38,7 +37,6 @@ export default class GameBrain {
         }
         board[1][birdIndex] = gameCellBird;
         return board;
-
     }
 
     isGameOver() {
@@ -128,18 +126,23 @@ export default class GameBrain {
     }
 
     moveBoard() {
-        //        if (this.gameIsOver()) {
-        //          alert('Game over');
-        //    }
+        let spaceBetween = this.getSpaceBetweenObstacles();
+       
         let birdIndex = this.getBirdPosition(this.gameBoard)
         this.gameBoard.shift();
         this.insertBirdOnBoard(this.gameBoard, birdIndex)
         if (this.score.score % 10 == 0) {
-            this.gameBoard.push(this.createGameColumnWithObstacle(5));
+            this.gameBoard.push(this.createGameColumnWithObstacle(spaceBetween));
         } else {
             this.gameBoard.push(this.createGameColumn());
         }
         this.score.score++;
+    }
+
+    getSpaceBetweenObstacles() {
+        if(this.score.score < 100) return 5;
+        if(this.score.score < 200) return 3;
+        if(this.score.score < 300) return 1;
     }
 
     getBirdPosition(board) {

@@ -6,7 +6,6 @@ export default class GameController {
         this.isRunning = false;
         this.isPaused = false;
         this.isGameOver = false;
-        this.gameSpeed = 100;
 
         this.runGame = {};
     }
@@ -15,18 +14,23 @@ export default class GameController {
         this.isRunning = true;
         this.isGameOver = false;
         this.viewContainer.focus();
-        this.runGame = setInterval(() => {
-            this.isGameOver = this.model.isGameOver();
-            if (!this.isGameOver) {
-                this.viewContainer.innerHTML = '';
-                this.model.moveBoard(this.model.getGameBoard());
-                let content = this.getBoardHtlm(this.model)
-                this.viewContainer.append(content);
-            } else {
-                this.stopGame();
-            }
-        }, this.gameSpeed);
+        this.viewContainer.innerHTML = '';
+        let content = this.getBoardHtlm(this.model)
+        this.viewContainer.append(content);
 
+        setTimeout(() => {
+            this.runGame = setInterval(() => {
+                this.isGameOver = this.model.isGameOver();
+                if (!this.isGameOver) {
+                    this.viewContainer.innerHTML = '';
+                    this.model.moveBoard(this.model.getGameBoard());
+                    let content = this.getBoardHtlm(this.model)
+                    this.viewContainer.append(content);
+                } else {
+                    this.stopGame();
+                }
+            }, 100);
+        }, 2000);
     }
 
     runForFiveSeconds() {
@@ -53,7 +57,7 @@ export default class GameController {
         this.runGame = {};
 
         let name = prompt('Your score is:' + this.model.score.score +
-         '\nPlease enter your name: ', 'Player' + this.model.scoreBoard.length)
+            '\nPlease enter your name: ', 'Player' + this.model.scoreBoard.length)
         let player = {};
         player.name = name;
         player.score = this.model.score.score;
