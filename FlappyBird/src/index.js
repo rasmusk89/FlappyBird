@@ -22,7 +22,7 @@ function gameControlClick(e) {
             gameController.isPaused = false;
             leaderboardController.stop();
             if (!gameController.isRunning) {
-                gameController.run();
+                gameController.run(100);
             }
             break;
         case 'leaderboard':

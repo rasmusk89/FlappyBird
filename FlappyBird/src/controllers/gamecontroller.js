@@ -6,7 +6,6 @@ export default class GameController {
         this.isRunning = false;
         this.isPaused = false;
         this.isGameOver = false;
-
         this.runGame = {};
     }
 
@@ -31,6 +30,21 @@ export default class GameController {
                 }
             }, 100);
         }, 2000);
+
+    }
+
+    refresh(interval) {
+        let game = setInterval(() => {
+            this.isGameOver = this.model.isGameOver();
+            if (!this.isGameOver) {
+                this.viewContainer.innerHTML = '';
+                this.model.moveBoard(this.model.getGameBoard());
+                let content = this.getBoardHtlm(this.model)
+                this.viewContainer.append(content);
+            } else {
+                this.stopGame();
+            }
+        }, interval);
     }
 
     runForFiveSeconds() {
