@@ -1,10 +1,10 @@
 import { ITodo } from "./domain/ITodo";
 import { EventAggregator, IDisposable } from "aurelia";
+import { AppState } from "./state/app-state";
 
 
 export class MyApp {
 
-  private todos: ITodo[] = [];
   private placeholder = 'Please insert smth?';
 
   private description = '';
@@ -13,33 +13,21 @@ export class MyApp {
 
   private subscriptions: IDisposable[] = [];
 
-  constructor(private eventAggregator: EventAggregator) {
+  constructor(
+    private eventAggregator: EventAggregator,
+    private appState: AppState) {
 
     this.subscriptions.push(
       this.eventAggregator.subscribe('new-todo', (descr: string) => this.addNewTodo(descr))
     );
-
-    this.todos.push(
-      {
-        description: 'Do smth!',
-        done: false,
-      },
-      {
-        description: 'Smth else!',
-        done: false,
-      }
-    )
   }
 
   addNewTodo = (descr: string): void => {
-    this.todos.push({
-      description: descr.trim(),
-      done: false
-    });
+    this.appState.addTodo({ description: descr.trim(), done: false });
   }
 
   removeTodo = (index: number): void => {
-    this.todos.splice(index, 1)
+    this.appState.removeTodo(index);
   }
 
   detathced() {

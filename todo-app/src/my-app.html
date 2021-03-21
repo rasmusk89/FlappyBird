@@ -22,7 +22,7 @@
                                 <div class="list-wrapper">
                                     <ul class="d-flex flex-column todo-list">
 
-                                        <todo-element repeat.for="item of todos" item.bind="item"
+                                        <todo-element repeat.for="item of appState.todos" item.bind="item"
                                             remove-callback.bind="removeTodo" todoNo.bind="$index"></todo-element>
 
                                     </ul>
