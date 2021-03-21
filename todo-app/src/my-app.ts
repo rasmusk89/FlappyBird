@@ -5,7 +5,9 @@ export class MyApp {
   private todos: ITodo[] = [];
   private placeholder = 'Please insert smth?';
 
-  private description = 'asdasd';
+  private description = '';
+
+  private userName = "FooBar"
 
   constructor() {
     this.todos.push(
@@ -20,10 +22,17 @@ export class MyApp {
     )
   }
 
-  addNewTodo() {
+  addNewTodo = (descr: string): void => {
     this.todos.push({
-      description: this.description,
+      description: descr.trim(),
       done: false
     });
   }
+
+  removeTodo = (index: number): void => {
+    this.todos.splice(index, 1)
+  }
+
+
+
 }

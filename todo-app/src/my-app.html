@@ -1,24 +1,12 @@
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Au2</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+<import from="./app-header" />
+<import from="./components/todo-input" />
+<import from="./components/todo-element" />
+
+<app-header></app-header>
 
 <div class="container">
     <main role="main" class="pb-3">
+        <hello-world greeting.bind="userName"></hello-world>
 
         <div class="page-content page-container" id="page-content">
             <div class="padding">
@@ -26,22 +14,17 @@
                     <div class="col-md-12">
                         <div class="card px-3">
                             <div class="card-body">
+
                                 <h4 class="card-title">Awesome Todo list in Au2</h4>
-                                <div class="add-items d-flex"> <input value.bind="description" type="text" class="form-control todo-list-input"
-                                        placeholder.one-time="placeholder"> 
-                                        <button click.delegate="addNewTodo()" class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button>
-                                </div>
+
+                                <todo-input placeholder.bind="'New todo...'" addnew-callback.bind="addNewTodo">
+                                </todo-input>
+
                                 <div class="list-wrapper">
                                     <ul class="d-flex flex-column todo-list">
-                                        <li repeat.for="todo of todos">
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox">${todo.description}
-                                                    <i class="input-helper"></i>
-                                                </label>
-                                            </div>
-                                            <i class="remove mdi mdi-close-circle-outline"></i>
-                                        </li>
+
+                                        <todo-element repeat.for="item of todos" item.bind="item"
+                                            remove-callback.bind="removeTodo" todoNo.bind="$index"></todo-element>
 
                                     </ul>
                                 </div>
