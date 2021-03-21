@@ -1,0 +1,29 @@
+<h1>Index</h1>
+
+<p>
+    <a href="/MealTypes/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                MealTypeName
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr repeat.for="item of data">
+            <td>
+                ${item.mealTypeName}
+            </td>
+            <td>
+                ${item.price}
+            </td>
+            
+        </tr>
+    </tbody>
+</table>
