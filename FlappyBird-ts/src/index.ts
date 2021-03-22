@@ -5,26 +5,26 @@ import GameBrain from './model/game-brain';
 import GameController from './controllers/game-controller';
 import LeaderboardController from './controllers/leaderboard-controller';
 
-let view = mainView();
+let view: HTMLDivElement = mainView();
 document.body.append(view);
-let ctrl_view = controlView(gameControlClick);
-let game_view = gameView(gameMoveKeyDown);
+let ctrl_view: HTMLDivElement = controlView(gameControlClick);
+let game_view: HTMLDivElement = gameView(gameMoveKeyDown);
 view.append(ctrl_view);
 view.append(game_view);
 
-let gameBrain = new GameBrain();
-let gameController = new GameController(gameBrain, game_view);
-let leaderboardController = new LeaderboardController(gameBrain, game_view);
+let gameBrain: GameBrain = new GameBrain();
+let gameController: GameController = new GameController(gameBrain, game_view);
+let leaderboardController: LeaderboardController = new LeaderboardController(gameBrain, game_view);
 
-function gameControlClick(e: MouseEvent) { // Check the type!
-    
+function gameControlClick(e: MouseEvent): void {
+
     switch ((e.target as HTMLDivElement).id) {
         case 'game':
-            gameController.isPaused = false;           
+            gameController.isPaused = false;
             leaderboardController.stop();
             if (!gameController.isRunning) {
                 gameController.run();
-               
+
             }
             break;
         case 'leaderboard':
@@ -34,15 +34,15 @@ function gameControlClick(e: MouseEvent) { // Check the type!
         case 'stop':
             if (gameController.isRunning) {
                 let stop = confirm('Are you sure you want to stop?')
-                if(stop) {
+                if (stop) {
                     gameController.stop();
                     leaderboardController.run()
                 }
-                else{
+                else {
                     if (!gameController.isRunning) {
                         gameController.run();
                     }
-                }      
+                }
             }
             break;
         case 'pause':
@@ -53,19 +53,17 @@ function gameControlClick(e: MouseEvent) { // Check the type!
     }
 }
 
-function gameMoveKeyDown(event: KeyboardEvent) {
-    if(event.key === 'ArrowUp' || event.key === 'w') {
+function gameMoveKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowUp' || event.key === 'w') {
         gameController.moveBirdUp();
-        
+
         console.log('UP');
     }
-    if(event.key === 'ArrowDown' || event.key === 's') {
+    if (event.key === 'ArrowDown' || event.key === 's') {
         gameController.moveBirdDown();
         console.log('DOWN');
-        
-    }
-    
 
+    }
 }
 
 leaderboardController.run();

@@ -6,62 +6,91 @@ export default class GameController {
     public isRunning: boolean = false;
     public isPaused: boolean = false;
     private runGame: any = {}; // Check the type!
+    private isGameOver: boolean = false;
 
     constructor(model: GameBrain, viewContainer: HTMLDivElement) {
         this.model = model;
         this.viewContainer = viewContainer
-
-
     }
-    run() {
-        this.viewContainer.focus();
+
+    run(): void {
         this.isRunning = true;
-        this.runGame = setInterval(() => {
-            this.isRunning = true;
-            this.viewContainer.innerHTML = '';
-            this.model.moveBoard();
-            let content = this.getBoardHtlm(this.model)
-            this.viewContainer.append(content);
-        }, 200);
-        this.flapBird();
+        this.isGameOver = false;
+        this.viewContainer.focus();
+        this.viewContainer.innerHTML = '';
+        let content: HTMLDivElement = this.getBoardHtlm(this.model)
+        this.viewContainer.append(content);
+
+        setTimeout(() => {
+            this.runGame = setInterval(() => {
+                this.isGameOver = this.model.isGameOver();
+                if (!this.isGameOver) {
+                    this.viewContainer.innerHTML = '';
+                    this.model.moveBoard();
+                    let content: HTMLDivElement = this.getBoardHtlm(this.model)
+                    this.viewContainer.append(content);
+                } else {
+                    this.stopGame();
+                }
+            }, 100);
+            this.flapBird();
+        }, 2000);
 
     }
 
-    runForFiveSeconds() {
+    stopGame(): void {
+        this.isRunning = false;
+        clearInterval(this.runGame);
+        this.runGame = {};
+
+        let playerName: string = prompt('Your score is:' + this.model.getScore() +
+            '\nPlease enter your name: ', 'Player' + this.model.getScoreBoard.length) ?? "Player " + this.model.getScoreBoard.length;
+
+        let playerScore: number = this.model.getScore();
+        this.model.getScoreBoard().push({
+            name: playerName,
+            score: playerScore
+        });
+
+        this.model.setNewGameBoard();
+        this.model.setNewScore();
+    }
+
+    runForFiveSeconds(): void {
         this.run()
         setTimeout(() => {
             this.stop()
         }, 5000);
     }
 
-    stop() {
+    stop(): void {
         this.isRunning = false;
         clearInterval(this.runGame);
         this.runGame = {};
     }
 
-    resizeUi() {
+    resizeUi(): void {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.viewContainer.append(this.getBoardHtlm(this.model));
         }
     }
 
-    getBoardHtlm(gameBrain: GameBrain) {
-        let content = document.createElement('div');
+    getBoardHtlm(gameBrain: GameBrain): HTMLDivElement {
+        let content: HTMLDivElement = document.createElement('div');
         content.id = 'gameboard';
 
-        let colWidth = window.innerWidth / this.model.getColumnCount() - 1;
-        let rowHeight = window.innerHeight / this.model.getRowCount() - 1;
+        let colWidth: number = window.innerWidth / this.model.getColumnCount() - 1;
+        let rowHeight: number = window.innerHeight / this.model.getRowCount() - 1;
 
         gameBrain.getGameBoard().forEach(columnData => {
-            let columnElement = document.createElement('div');
+            let columnElement: HTMLDivElement = document.createElement('div');
             columnElement.style.minWidth = colWidth + 'px';
             columnElement.style.maxWidth = colWidth + 'px';
             columnElement.style.float = 'left';
 
             columnData.forEach(rowData => {
-                let rowElement = document.createElement('div');
+                let rowElement: HTMLDivElement = document.createElement('div');
                 if (rowData !== gameBrain.gameCellPath()) {
                     rowElement.style.backgroundColor = '#00F';
                 }
@@ -82,30 +111,29 @@ export default class GameController {
         return content;
     };
 
-    moveBirdUp() {
+    moveBirdUp(): void {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.model.moveBirdUp();
-            let content = this.getBoardHtlm(this.model)
+            let content: HTMLDivElement = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
     }
 
-    moveBirdDown() {
+    moveBirdDown(): void {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
             this.model.moveBirdDown();
-            let content = this.getBoardHtlm(this.model)
+            let content: HTMLDivElement = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
     }
 
-    flapBird() {
-        setInterval(() => {
-            this.moveBirdDown();
-        }, 500);
+    flapBird(): void {
+        setTimeout(() => {
+            setInterval(() => {
+                this.moveBirdDown();
+            }, 200);
+        }, 1000);
     }
-
-
-
 }

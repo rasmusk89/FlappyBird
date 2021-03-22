@@ -11,52 +11,66 @@ export default class LeaderboardController {
         this.viewContainer = viewContainer;
     }
 
-    run() {
+    run(): void {
         this.isRunning = true;
         this.viewContainer.innerHTML = '';
-        this.viewContainer.append(this.getBoardHtlm(this.model));
+        this.viewContainer.append(this.createLeaderboardHtml(this.model));
     }
 
-    stop() {
+    stop(): void {
         this.isRunning = false;
     }
 
-    resizeUi() {
+    resizeUi(): void {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            this.viewContainer.append(this.getBoardHtlm(this.model));
+            this.viewContainer.append(this.createLeaderboardHtml(this.model));
         }
     }
 
-    getBoardHtlm(gameBrain: GameBrain) {
-        let content = document.createElement('div');
+    createLeaderboardHtml(gameBrain: GameBrain): HTMLDivElement {
+        let content: HTMLDivElement = document.createElement('div');
         content.id = 'leaderboard';
 
-        let colWidth = window.innerWidth / this.model.getColumnCount() - 1;
-        let rowHeight = window.innerHeight / this.model.getRowCount() - 1;
+        let table: HTMLTableElement = document.createElement('table');
 
-        gameBrain.getGameBoard().forEach(columnData => {
-            let columnElement = document.createElement('div');
-            columnElement.style.minWidth = colWidth + 'px';
-            columnElement.style.maxWidth = colWidth + 'px';
-            columnElement.style.float = 'left';
+        let row: HTMLTableRowElement = document.createElement('tr');
 
-            columnData.forEach(rowData => {
-                let rowElement = document.createElement('div');
-                if (rowData === gameBrain.gameCellTop() || rowData === gameBrain.gameCellBottom()) {
-                    rowElement.style.backgroundColor = '#F00';
-                }
 
-                rowElement.style.minHeight = rowHeight + 'px';
-                rowElement.style.maxHeight = rowHeight + 'px';
+        let headPosition: HTMLTableHeaderCellElement = document.createElement('th');
+        headPosition.innerHTML = 'Position';
+        let headName: HTMLTableHeaderCellElement = document.createElement('th');
+        headName.innerHTML = 'Name';
+        let headScore: HTMLTableHeaderCellElement = document.createElement('th');
+        headScore.innerHTML = 'Score';
 
-                columnElement.append(rowElement);
-            });
+        row.append(headPosition);
+        row.append(headScore);
+        row.append(headName);
 
-            content.append(columnElement)
+        table.append(row);
+
+        gameBrain.getLeaderboard().forEach(function callback(value, index) {
+            let row: HTMLTableRowElement = document.createElement('tr');
+            let position: HTMLTableDataCellElement = document.createElement('td');
+            position.innerHTML = (index + 1).toString();
+            let name: HTMLTableDataCellElement = document.createElement('td');
+            name.innerHTML = value.name;
+            let score: HTMLTableDataCellElement = document.createElement('td');
+            score.innerHTML = (value.score).toString();
+
+            row.append(position);
+            row.append(score);
+            row.append(name);
+
+            table.append(row)
+
         });
+
+        content.append(table);
+
         return content;
-    };
+    }
 
 
 }

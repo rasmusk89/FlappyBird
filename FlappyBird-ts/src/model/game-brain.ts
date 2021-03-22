@@ -1,6 +1,6 @@
 class GameScore {
-    public name = '';
-    public score = 0;
+    public name: string = '';
+    public score: number = 0;
 }
 
 const gameCellPath: number = 0;
@@ -14,21 +14,22 @@ export default class GameBrain {
     private rowCount: number = 20;
     private columnCount: number = 30;
     private score: GameScore = new GameScore();
-    // private scoreBoard: number[] = [];
+    private scoreBoard: GameScore[] = [];
     private gameBoard: number[][] = this.createGameBoard();
 
-    getColumnCount() {
+    getColumnCount(): number {
         return this.columnCount;
     }
 
-    getRowCount() {
+    getRowCount(): number {
         return this.rowCount;
     }
 
-    insertBirdOnBoard(board: number[][], birdIndex: number=this.rowCount / 2) {
-        if(board[1][birdIndex] != gameCellPath) {
-            alert('Game over!')
-        }
+    getLeaderboard(): GameScore[] {
+        return this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);;
+    }
+
+    insertBirdOnBoard(board: number[][], birdIndex: number = this.rowCount / 2): number[][] {
         if (board[0][birdIndex] == gameCellBird) {
             board[0][birdIndex] = gameCellPath;
         }
@@ -39,9 +40,9 @@ export default class GameBrain {
         return board;
     }
 
-    moveBirdUp() {
+    moveBirdUp(): void {
         let birdIndex = null;
-        for (let index:number = 0; index < this.rowCount; index++) {
+        for (let index: number = 0; index < this.rowCount; index++) {
             if (this.gameBoard[1][index] === gameCellBird) {
                 birdIndex = index;
             }
@@ -52,7 +53,7 @@ export default class GameBrain {
         }
     }
 
-    moveBirdDown() {
+    moveBirdDown(): void {
         let birdIndex = null;
         for (let index = 0; index < this.rowCount; index++) {
             if (this.gameBoard[1][index] === gameCellBird) {
@@ -65,11 +66,11 @@ export default class GameBrain {
         }
     }
 
-    createGameColumnWithObstacle(spaceBetween: number) {
-        let top = this.randomIntFromTo(1, this.rowCount - 2 - spaceBetween);
-        let bottom = top + spaceBetween;
-        let res = [];
-        for (let index = 0; index < this.rowCount; index++) {
+    createGameColumnWithObstacle(spaceBetween: number): number[] {
+        let top: number = this.randomIntFromTo(1, this.rowCount - 2 - spaceBetween);
+        let bottom: number = top + spaceBetween;
+        let res: number[] = [];
+        for (let index: number = 0; index < this.rowCount; index++) {
             if (index < top) {
                 res.push(gameCellTop)
             }
@@ -83,9 +84,9 @@ export default class GameBrain {
         return res;
     }
 
-    createGameColumn() {
-        let res = [];
-        for (let index = 0; index < this.rowCount; index++) {
+    createGameColumn(): number[] {
+        let res: number[] = [];
+        for (let index: number = 0; index < this.rowCount; index++) {
             if (index < 1) {
                 res.push(gameCellTop)
             }
@@ -99,9 +100,9 @@ export default class GameBrain {
         return res;
     }
 
-    createGameBoard() {
-        let board = [];
-        for (let index = 0; index < this.columnCount; index++) {
+    createGameBoard(): number[][] {
+        let board: number[][] = [];
+        for (let index: number = 0; index < this.columnCount; index++) {
             if (index % 10 == 0) {
                 board.push(this.createGameColumnWithObstacle(5))
             }
@@ -111,58 +112,73 @@ export default class GameBrain {
         }
         return this.insertBirdOnBoard(board);
     }
-    /*
-    flapBird() {
-        let birdIndex = this.getBirdPosition(this.gameBoard);
-        this.gameBoard[1][birdIndex] == gameCellPath;
-        this.gameBoard[1][birdIndex + 1] == gameCellBird
-    }
-    */
 
-    moveBoard() {
-        let birdIndex = this.getBirdPosition(this.gameBoard)
+    moveBoard(): void {
+        let spaceBetween: number = this.getSpaceBetweenObstacles();
+
+        let birdIndex: number = this.getBirdPosition(this.gameBoard)
         this.gameBoard.shift();
         this.insertBirdOnBoard(this.gameBoard, birdIndex!)
         if (this.score.score % 10 == 0) {
-            this.gameBoard.push(this.createGameColumnWithObstacle(5));
+            this.gameBoard.push(this.createGameColumnWithObstacle(spaceBetween));
         } else {
             this.gameBoard.push(this.createGameColumn());
         }
         this.score.score++;
     }
 
-    gameIsOver() {
-        let birdIndex = this.getBirdPosition(this.gameBoard)
-        if (this.gameBoard[1][birdIndex! + 1] !== gameCellPath) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    getSpaceBetweenObstacles(): number {
+        if (this.score.score < 100) return 5;
+        if (this.score.score < 200) return 3;
+        if (this.score.score < 300) return 1;
+        return -1;
     }
 
-    getBirdPosition(board: number[][]) {
+    isGameOver(): boolean {
+        if (this.gameBoard[2][this.getBirdPosition(this.gameBoard)] != gameCellPath) {
+            return true;
+        }
+        return false;
+    }
+
+    getBirdPosition(board: number[][]): number {
         let birdIndex = null;
         for (let index: number = 0; index < this.rowCount; index++) {
             if (board[1][index] === gameCellBird) {
                 birdIndex = index;
             }
         }
-        return birdIndex;
+        return birdIndex != null ? birdIndex : -1;
     }
 
-    randomIntFromTo(min: number, max: number) {
+    randomIntFromTo(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    getGameBoard() {
+    getGameBoard(): number[][] {
         return this.gameBoard
     }
 
-    gameCellPath() { return gameCellPath };
-    gameCellTop() { return gameCellTop };
-    gameCellBottom() { return gameCellBottom };
-    gameCellBird() { return gameCellBird };
+    getScore(): number {
+        return this.score.score;
+    }
+
+    getScoreBoard(): GameScore[] {
+        return this.scoreBoard;
+    }
+
+    setNewGameBoard():void {
+        this.gameBoard = this.createGameBoard();
+    }
+
+    setNewScore(): void {
+        this.score = new GameScore();
+    }
+
+    gameCellPath(): number { return gameCellPath };
+    gameCellTop(): number { return gameCellTop };
+    gameCellBottom(): number { return gameCellBottom };
+    gameCellBird(): number { return gameCellBird };
 
 
 }
