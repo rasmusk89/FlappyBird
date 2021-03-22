@@ -53,17 +53,21 @@ export default class GameBrain {
         }
     }
 
-    moveBirdDown(): void {
-        let birdIndex = null;
+    moveBirdDown(): boolean {
+        let birdIndex: number = -1;
         for (let index = 0; index < this.rowCount; index++) {
             if (this.gameBoard[1][index] === gameCellBird) {
                 birdIndex = index;
             }
         }
+        if (this.gameBoard[1][birdIndex + 1] == gameCellBottom) { 
+            return false;
+        }
         if (birdIndex !== null && birdIndex < this.rowCount - 2) {
             this.gameBoard[1][birdIndex] = gameCellPath;
             this.gameBoard[1][birdIndex + 1] = gameCellBird;
         }
+        return true;
     }
 
     createGameColumnWithObstacle(spaceBetween: number): number[] {
@@ -138,6 +142,7 @@ export default class GameBrain {
         if (this.gameBoard[2][this.getBirdPosition(this.gameBoard)] != gameCellPath) {
             return true;
         }
+
         return false;
     }
 
@@ -167,7 +172,7 @@ export default class GameBrain {
         return this.scoreBoard;
     }
 
-    setNewGameBoard():void {
+    setNewGameBoard(): void {
         this.gameBoard = this.createGameBoard();
     }
 

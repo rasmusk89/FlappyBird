@@ -123,17 +123,15 @@ export default class GameController {
     moveBirdDown(): void {
         if (this.isRunning) {
             this.viewContainer.innerHTML = '';
-            this.model.moveBirdDown();
+            if (!this.model.moveBirdDown()) { this.stopGame() }
             let content: HTMLDivElement = this.getBoardHtlm(this.model)
             this.viewContainer.append(content);
         }
     }
 
     flapBird(): void {
-        setTimeout(() => {
-            setInterval(() => {
-                this.moveBirdDown();
-            }, 200);
-        }, 1000);
+        setInterval(() => {
+            this.moveBirdDown()
+        }, 400);
     }
 }
