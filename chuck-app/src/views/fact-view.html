@@ -1,0 +1,30 @@
+<h1>Fact</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Url
+            </th>
+            <th>
+                Value
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr repeat.for="item of data">
+            <td>
+                ${item.id}
+            </td>    
+            <td>
+                ${item.url}
+            </td> 
+            <td>
+                ${item.value}
+            </td>         
+        </tr>
+    </tbody>
+</table>
