@@ -1,7 +1,7 @@
 import { IFact } from "../domain/IFact";
 import { ScienceService } from "../services/science-service";
 
-export class FactView {
+export class ScienceView {
     private data: IFact;
 
     constructor(private scienceService: ScienceService) {

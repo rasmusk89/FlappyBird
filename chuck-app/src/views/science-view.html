@@ -19,8 +19,8 @@
             <td>
                 ${data.id}
             </td>
-            <td>
-                ${data.category}
+            <td repeat.for="item of data.categories">
+                ${item}
             </td>    
             <td>
                 ${data.value}

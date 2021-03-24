@@ -1,7 +1,7 @@
 import { IFact } from "../domain/IFact";
 import { PoliticalService } from "../services/political-service";
 
-export class FactView {
+export class PoliticalView {
     private data: IFact;
 
     constructor(private politicalService: PoliticalService) {
