@@ -12,7 +12,6 @@ export class PoliticalService {
             .get("https://api.chucknorris.io/jokes/random?category=political", { cache: "no-store" });
         if (response.ok) {
             const data = (await response.json()) as IFact;
-            console.log(data)
             return data;
         }
         return null;

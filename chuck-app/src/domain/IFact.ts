@@ -1,5 +1,5 @@
 export interface IFact {
     id: string;
-    url: string;
+    category: string;
     value: string;
 }
