@@ -19,7 +19,6 @@ export class FactView {
             value: await this.categoryService.getRandomCategory()
         }
 
-        console.log("Fact attached")
         this.data = await this.factService.getRandomFactByCategory(this.category);
         this.data.category = this.category.value;
         this.appState.addFactToSeenFacts(this.data);
