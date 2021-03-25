@@ -10,7 +10,6 @@ export class MyApp {
 
   }
 
-
   detathced() {
     this.subscriptions.forEach(subscription => subscription.dispose())
     this.subscriptions = [];

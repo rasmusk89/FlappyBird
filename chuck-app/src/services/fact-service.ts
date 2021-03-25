@@ -2,7 +2,6 @@ import { HttpClient, inject } from "aurelia";
 import { IFact } from "../domain/IFact";
 import { ICategory } from "../domain/ICategory";
 
-
 @inject()
 export class FactService {
 
