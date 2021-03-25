@@ -2,15 +2,14 @@ import { ICategory } from "../domain/ICategory";
 import { CategoryService } from "../services/category-service";
 
 export class CategoryView {
-    private data: ICategory[] = [];
+    private allCategories: ICategory[];
 
     constructor(private categoryService: CategoryService) {
-
     }
 
     async attached() {
         console.log("Category attached")
-        this.data = await this.categoryService.getAllAsync();
+        this.allCategories = await this.categoryService.getAllCategories();
     }
 
 }

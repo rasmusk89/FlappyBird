@@ -1,3 +1,7 @@
 export interface ICategory {
-    category: string;
+    value: string;
+}
+
+function setCategory(value: string) {
+    value = value;
 }

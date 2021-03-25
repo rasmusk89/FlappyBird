@@ -1,15 +1,19 @@
 import { IFact } from "../domain/IFact";
-import { PoliticalService } from "../services/political-service";
+import { FactService } from "../services/fact-service";
+import { ICategory } from "../domain/ICategory";
 
 export class PoliticalView {
     private data: IFact;
+    private category: ICategory = {
+        value: "political"
+    };
 
-    constructor(private politicalService: PoliticalService) {
+    constructor(private factService: FactService) {
     }
 
     async attached() {
         console.log("Political attached")
-        this.data = await this.politicalService.getRandomPoliticalFact();
+        this.data = await this.factService.getRandomFactByCategory(this.category);
     }
 
 }
