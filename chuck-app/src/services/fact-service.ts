@@ -10,12 +10,13 @@ export class FactService {
 
     async getRandomFactByCategory(category: ICategory): Promise<IFact> {
         var response = await this.httpClient
-            .get(`https://api.chucknorris.io/jokes/random?category=${category.value}`, { cache: "no-store" });
+            .get(`https://api.chucknorris.io/jokes/random?category=${category.category}`, { cache: "no-store" });
         if (response.ok) {
             const data = (await response.json()) as IFact;
             return data;
         }
-        return null;
+        throw new Error("Can't get Fact!");
+
     }
 
 }

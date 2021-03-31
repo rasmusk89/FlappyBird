@@ -6,7 +6,7 @@ import { AppState } from "../state/app-state";
 
 export class FactView {
     private data: IFact;
-    private category: ICategory;
+    private facts: IFact[] = [];
 
     constructor(
         private factService: FactService,
@@ -15,13 +15,16 @@ export class FactView {
     }
 
     async attached() {
-        this.category = {
-            value: await this.categoryService.getRandomCategory()
+        for (let i = 0; i < 5; i++) {
+            let category: ICategory = {
+                category: await this.categoryService.getRandomCategory()
+            };
+            this.data = await this.factService.getRandomFactByCategory(category);
+            this.data.category = category.category;
+            this.facts.push(this.data);
+
+            this.appState.addFactToSeenFacts(this.data);
         }
 
-        this.data = await this.factService.getRandomFactByCategory(this.category);
-        this.data.category = this.category.value;
-        this.appState.addFactToSeenFacts(this.data);
     }
-
 }

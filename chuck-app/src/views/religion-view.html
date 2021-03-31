@@ -15,15 +15,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr >
+        <tr repeat.for="item of data">
             <td>
-                ${data.id}
+                ${item.id}
             </td>
             <td>
-                ${category.value}
+                ${item.category}
             </td>   
             <td>
-                ${data.value}
+                ${item.value}
             </td>         
         </tr>
     </tbody>

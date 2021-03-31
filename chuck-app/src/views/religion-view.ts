@@ -4,17 +4,20 @@ import { ICategory } from "../domain/ICategory";
 
 
 export class ReligionView {
-    private data: IFact;
+    private data: IFact[] = [];
     private category: ICategory = {
-        value: "religion"
+        category: "religion"
     };
 
     constructor(private factService: FactService) {
     }
 
     async attached() {
-        console.log("Religion attached")
-        this.data = await this.factService.getRandomFactByCategory(this.category);
+        for (let i = 0; i < 5; i++) {
+            let fact = await this.factService.getRandomFactByCategory(this.category);
+            fact.category = this.category.category;
+            this.data.push(fact);
+        }
     }
 
 }

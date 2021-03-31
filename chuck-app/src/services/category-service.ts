@@ -16,7 +16,7 @@ export class CategoryService {
             const randomCategory = data[Math.floor(Math.random() * data.length)];
             return randomCategory;
         }
-        return null;
+        throw new Error("Can't get category!");
     }
 
     async getAllCategories(): Promise<ICategory[]> {
@@ -27,8 +27,7 @@ export class CategoryService {
             const data = (await response.json()) as ICategory[];
             return data;
         }
-        return null;
+        throw new Error("Can't get category!");
     }
-
 
 }
