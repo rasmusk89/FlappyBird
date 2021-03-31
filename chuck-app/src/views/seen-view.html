@@ -2,22 +2,12 @@
 <br>
 
 <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                Category
-            </th>
-            <th>
-                Fact
-            </th>
-        </tr>
-    </thead>
     <tbody>
         <tr repeat.for="item of appState.seenFacts">
             <td>
-                ${item.category}
+                ${item.category.toUpperCase()}
             </td>    
-            <td>
+            <td class="fact">
                 ${item.value}
             </td>         
         </tr>

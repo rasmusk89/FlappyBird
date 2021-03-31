@@ -13,4 +13,12 @@ export class AppState {
     countSeenFacts(): number {
         return this.seenFacts.length;
     }
+
+    getListOfFactValues(): string[] {
+        let facts: string[] = [];
+        for (const fact of this.seenFacts) {
+            facts.push(fact.value);
+        }
+        return facts;
+    }
 }
