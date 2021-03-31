@@ -10,8 +10,7 @@ export class FactView {
 
     constructor(
         private factService: FactService,
-        private categoryService: CategoryService,
-        private appState: AppState) {
+        private categoryService: CategoryService) {
     }
 
     async attached() {
@@ -22,8 +21,6 @@ export class FactView {
             this.data = await this.factService.getRandomFactByCategory(category);
             this.data.category = category.category;
             this.facts.push(this.data);
-
-            this.appState.addFactToSeenFacts(this.data);
         }
 
     }

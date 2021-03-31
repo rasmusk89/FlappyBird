@@ -1,11 +1,9 @@
-<h1>Seen facts</h1>
+<h1 class="categoryHeader">Seen facts</h1>
+<br>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                Id
-            </th>
             <th>
                 Category
             </th>
@@ -16,9 +14,6 @@
     </thead>
     <tbody>
         <tr repeat.for="item of appState.seenFacts">
-            <td>
-                ${item.id}
-            </td>
             <td>
                 ${item.category}
             </td>    

@@ -1,5 +1,6 @@
 import { IFact } from "../domain/IFact";
 import { FactService } from "../services/fact-service";
+import { AppState } from "../state/app-state";
 import { ICategory } from "../domain/ICategory";
 
 export class ScienceView {
@@ -8,7 +9,8 @@ export class ScienceView {
         category: "science"
     };
 
-    constructor(private factService: FactService) {
+    constructor(private factService: FactService,
+        private appState: AppState) {
     }
 
     async attached() {
@@ -16,6 +18,8 @@ export class ScienceView {
             let fact = await this.factService.getRandomFactByCategory(this.category);
             fact.category = this.category.category;
             this.data.push(fact);
+
+            this.appState.addFactToSeenFacts(fact);
         }
     }
 

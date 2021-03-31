@@ -1,26 +1,21 @@
-<h1>Fact</h1>
+<h1 class="categoryHeader">Random facts</h1>
+<br>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                Id
-            </th>
             <th>
                 Category
             </th>
             <th>
-                Value
+                Random fact
             </th>
         </tr>
     </thead>
     <tbody>
         <tr repeat.for="data of facts">
             <td>
-                ${data.id}
-            </td>
-            <td>
-                ${data.category}
+                ${data.category.toUpperCase()}
             </td>    
             <td>
                 ${data.value}

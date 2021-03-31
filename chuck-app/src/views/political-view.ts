@@ -1,6 +1,7 @@
 import { IFact } from "../domain/IFact";
 import { FactService } from "../services/fact-service";
 import { ICategory } from "../domain/ICategory";
+import { AppState } from "../state/app-state";
 
 export class PoliticalView {
     private data: IFact[] = [];
@@ -8,7 +9,8 @@ export class PoliticalView {
         category: "political"
     };
 
-    constructor(private factService: FactService) {
+    constructor(private factService: FactService,
+        private appState: AppState) {
     }
 
     async attached() {
@@ -16,6 +18,8 @@ export class PoliticalView {
             let fact = await this.factService.getRandomFactByCategory(this.category);
             fact.category = this.category.category;
             this.data.push(fact);
+        
+            this.appState.addFactToSeenFacts(fact);
         }
     }
 

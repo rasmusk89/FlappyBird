@@ -469,3 +469,11 @@ body {
     line-height: 60px;
     text-align: center;
 }
+
+.categoryHeader {
+    text-align: center;
+}
+
+.table {
+    text-align: center;
+}
