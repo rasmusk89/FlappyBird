@@ -7,7 +7,7 @@ export class AppState {
     }
 
     addFactToSeenFacts(fact: IFact): void {
-        this.seenFacts = [...this.seenFacts, fact];
+        this.seenFacts = [...this.seenFacts, fact].sort((a, b) => (a.category > b.category) ? 1 : -1);
     }
     
     countSeenFacts(): number {

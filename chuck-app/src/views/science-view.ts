@@ -19,7 +19,9 @@ export class ScienceView {
             fact.category = this.category.category;
             this.data.push(fact);
 
-            this.appState.addFactToSeenFacts(fact);
+            if(!this.appState.seenFacts.includes(fact)) {
+                this.appState.addFactToSeenFacts(fact);
+            }
         }
     }
 

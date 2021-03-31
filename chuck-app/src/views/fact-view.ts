@@ -10,7 +10,8 @@ export class FactView {
 
     constructor(
         private factService: FactService,
-        private categoryService: CategoryService) {
+        private categoryService: CategoryService,
+) {
     }
 
     async attached() {
