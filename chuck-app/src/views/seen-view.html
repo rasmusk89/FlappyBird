@@ -1,15 +1,32 @@
-<h1 class="categoryHeader">Seen facts</h1>
-<br>
+<div class="view">
+    <h1 class="categoryHeader">Seen facts</h1>
+    <br>
 
-<table class="table table-striped">
-    <tbody>
-        <tr repeat.for="item of appState.seenFacts">
-            <td>
-                ${item.category.toUpperCase()}
-            </td>    
-            <td class="fact">
-                ${item.value}
-            </td>         
-        </tr>
-    </tbody>
-</table>
+    <h3 class="categoryHeader">Random seen facts</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr repeat.for="item of getRandomFive()">
+                <td>
+                    ${item.category.toUpperCase()}
+                </td>
+                <td class="fact">
+                    ${item.value}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="categoryHeader">Other seen facts</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr repeat.for="item of appState.seenFacts">
+                <td>
+                    ${item.category.toUpperCase()}
+                </td>
+                <td class="fact">
+                    ${item.value}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

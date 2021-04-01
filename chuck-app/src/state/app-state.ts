@@ -2,6 +2,7 @@ import { IFact } from "../domain/IFact";
 
 export class AppState {
     public seenFacts: readonly IFact[] = [];
+    public randomFive: IFact[] = [];
 
     constructor() {
     }
@@ -9,7 +10,7 @@ export class AppState {
     addFactToSeenFacts(fact: IFact): void {
         this.seenFacts = [...this.seenFacts, fact].sort((a, b) => (a.category > b.category) ? 1 : -1);
     }
-    
+
     countSeenFacts(): number {
         return this.seenFacts.length;
     }
@@ -20,5 +21,10 @@ export class AppState {
             facts.push(fact.value);
         }
         return facts;
+    }
+
+
+    randomIntFromTo(min, max): number {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 }

@@ -1,25 +1,28 @@
-<h1 class="categoryHeader">Random facts</h1>
-<br>
+<div class="view">
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                Category
-            </th>
-            <th>
-                Random fact
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr repeat.for="data of facts">
-            <td>
-                ${data.category.toUpperCase()}
-            </td>    
-            <td class="fact">
-                ${data.value}
-            </td>         
-        </tr>
-    </tbody>
-</table>
+    <h1 class="categoryHeader">Random facts</h1>
+    <br>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Random fact
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr repeat.for="data of facts">
+                <td>
+                    ${data.category.toUpperCase()}
+                </td>
+                <td class="fact">
+                    ${data.value}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

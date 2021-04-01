@@ -18,6 +18,7 @@ export class MealtypeService {
         return [];
     }
 
+    /*
     getAllPromise(): Promise<IMealtype[]> {
         return this.httpClient
             .get("https://localhost:5001/api/mealtypes", { cache: "no-store" })
@@ -28,4 +29,5 @@ export class MealtypeService {
             .catch(error => []);
     }
 
+    */
 }

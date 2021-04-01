@@ -1,15 +1,17 @@
-<h1 class="categoryHeader">Science facts</h1>
-<br>
+<div class="view">
+    <h1 class="categoryHeader">Science facts</h1>
+    <br>
 
-<table class="table table-striped">
-    <tbody>
-        <tr repeat.for="item of data">
-            <td>
-                ${$index + 1}
-            </td>
-            <td class="fact">
-               ${item.value}
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <tbody>
+            <tr repeat.for="item of data">
+                <td>
+                    ${$index + 1}
+                </td>
+                <td class="fact">
+                    ${item.value}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

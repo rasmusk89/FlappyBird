@@ -1,3 +1,5 @@
+<import from="./mealtypes/mealtype-details"/>
+
 <h1>Index</h1>
 
 <p>
@@ -6,22 +8,31 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Id</th>
             <th>
                 MealTypeName
             </th>
             <th>
                 Price
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
         <tr repeat.for="item of data">
             <td>
+                ${item.id}
+            </td>
+            <td>
                 ${item.mealTypeName}
             </td>
             <td>
                 ${item.price}
+            </td>
+            <td>
+                <a load="/mealtype-details(id=${item.id})">Details</a>
             </td>
             
         </tr>

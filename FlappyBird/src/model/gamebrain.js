@@ -11,7 +11,6 @@ export const gameCellTop = 1;
 export const gameCellBottom = -1;
 export const gameCellBird = 2;
 
-
 export default class GameBrain {
 
     constructor(rowCount = 20, columnCount = 30) {
@@ -21,10 +20,10 @@ export default class GameBrain {
 
         this.scoreBoard = [];
         this.gameBoard = this.createGameBoard()
-        
+
     }
 
-    getLeaderboard() {        
+    getLeaderboard() {
         return this.scoreBoard.sort((a, b) => (a.score < b.score) ? 1 : -1);;
     }
 
@@ -127,7 +126,7 @@ export default class GameBrain {
 
     moveBoard() {
         let spaceBetween = this.getSpaceBetweenObstacles();
-       
+
         let birdIndex = this.getBirdPosition(this.gameBoard)
         this.gameBoard.shift();
         this.insertBirdOnBoard(this.gameBoard, birdIndex)
@@ -140,9 +139,9 @@ export default class GameBrain {
     }
 
     getSpaceBetweenObstacles() {
-        if(this.score.score < 100) return 5;
-        if(this.score.score < 200) return 3;
-        if(this.score.score < 300) return 1;
+        if (this.score.score < 100) return 5;
+        if (this.score.score < 200) return 3;
+        if (this.score.score < 300) return 1;
     }
 
     getBirdPosition(board) {

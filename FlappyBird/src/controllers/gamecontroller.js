@@ -22,7 +22,7 @@ export default class GameController {
                 this.isGameOver = this.model.isGameOver();
                 if (!this.isGameOver) {
                     this.viewContainer.innerHTML = '';
-                    this.model.moveBoard(this.model.getGameBoard());
+                    this.model.moveBoard();
                     let content = this.getBoardHtlm(this.model)
                     this.viewContainer.append(content);
                 } else {
