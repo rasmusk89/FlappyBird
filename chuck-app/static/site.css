@@ -482,6 +482,24 @@ body {
     text-align: left;
 }
 
-.view {
+.viewPolitical {
+    background-color: rgb(215, 255, 255);
+
+}
+
+.viewScience {
+    background-color: rgb(215, 204, 255);
+
+}
+
+.viewReligion {
+    background-color: rgb(215, 255, 204);
+    
+}
+
+.viewport {
     background-color: cornsilk;
 }
+
+
+
