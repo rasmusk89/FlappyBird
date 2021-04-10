@@ -16,56 +16,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr repeat.for="item of data">
             <td>
-                Breakfast
+                ${item.mealTypeName}
             </td>
             <td>
-                1,20
+                ${item.price}
             </td>
             <td>
                 <a href="/MealTypes/Edit/a42e4110-d115-4fae-90e1-08d8f1fe09ba">Edit</a> |
-                <a href="/MealTypes/Details/a42e4110-d115-4fae-90e1-08d8f1fe09ba">Details</a> |
+                <a load="/meal-type-details(${item.id})">Details</a> |
                 <a href="/MealTypes/Delete/a42e4110-d115-4fae-90e1-08d8f1fe09ba">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Lunch
-            </td>
-            <td>
-                1,80
-            </td>
-            <td>
-                <a href="/MealTypes/Edit/ea9b6be7-80cf-492b-90e2-08d8f1fe09ba">Edit</a> |
-                <a href="/MealTypes/Details/ea9b6be7-80cf-492b-90e2-08d8f1fe09ba">Details</a> |
-                <a href="/MealTypes/Delete/ea9b6be7-80cf-492b-90e2-08d8f1fe09ba">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Dinner
-            </td>
-            <td>
-                1,50
-            </td>
-            <td>
-                <a href="/MealTypes/Edit/80250959-43f8-44b5-90e3-08d8f1fe09ba">Edit</a> |
-                <a href="/MealTypes/Details/80250959-43f8-44b5-90e3-08d8f1fe09ba">Details</a> |
-                <a href="/MealTypes/Delete/80250959-43f8-44b5-90e3-08d8f1fe09ba">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Breakfast
-            </td>
-            <td>
-                11,00
-            </td>
-            <td>
-                <a href="/MealTypes/Edit/eb3c51e6-707d-401f-b26f-b9dd02526c02">Edit</a> |
-                <a href="/MealTypes/Details/eb3c51e6-707d-401f-b26f-b9dd02526c02">Details</a> |
-                <a href="/MealTypes/Delete/eb3c51e6-707d-401f-b26f-b9dd02526c02">Delete</a>
             </td>
         </tr>
     </tbody>

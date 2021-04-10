@@ -1,0 +1,32 @@
+<h1>Details</h1>
+
+<div>
+    <h4>MealType</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-4">
+            Id
+        </dt>
+        <dd class="col-sm-8">
+            ${data.id}
+        </dd>
+        <dt class="col-sm-4">
+            MealTypeName
+        </dt>
+        <dd class="col-sm-8">
+            ${data.mealTypeName}
+        </dd>
+        <dt class="col-sm-4">
+            Price
+        </dt>
+        <dd class="col-sm-8">
+            ${data.price}
+        </dd>
+    </dl>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a load="/meal-type-index">Back to List</a>
+</div>
