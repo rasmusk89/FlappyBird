@@ -1,4 +1,4 @@
-import { HttpClient } from "aurelia";
+import { HttpClient, IRouter } from "aurelia";
 import { SrvRecord } from "node:dns";
 import { AccountService } from "../../services/account-service";
 import { AppState } from "../../state/app-state";
@@ -12,6 +12,7 @@ export class IdentityLogin {
     private password: string;
 
     constructor(
+        @IRouter private router: IRouter,
         private state: AppState,
         protected httpClient: HttpClient) {
     }
@@ -25,6 +26,8 @@ export class IdentityLogin {
             this.state.token = (response.data as IJwt).token;
             this.state.firstname = (response.data as IJwt).firstname;
             this.state.lastname = (response.data as IJwt).lastname;
+
+            await this.router.load('/home-index');
         }
 
         
