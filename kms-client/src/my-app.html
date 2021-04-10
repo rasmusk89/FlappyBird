@@ -64,7 +64,7 @@
                         <a class="nav-link text-dark" load="/identity-login">Login</a>
                     </li>
                     <li show.bind="state.token != null" class="nav-item">
-                        <a class="nav-link text-dark" load="/identity-login">Logout</a>
+                        <a class="nav-link text-dark" click.delegate="logOut($event)">Logout</a>
                     </li>
                 </ul>
             </div>
