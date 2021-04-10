@@ -1,6 +1,8 @@
 import { HttpClient } from "aurelia";
 import { SrvRecord } from "node:dns";
 import { AccountService } from "../../services/account-service";
+import { AppState } from "../../state/app-state";
+import { IJwt } from "../../types/IJwt";
 
 export class IdentityLogin {
     private service: AccountService =
@@ -9,14 +11,22 @@ export class IdentityLogin {
     private email: string;
     private password: string;
 
-    constructor(protected httpClient: HttpClient) {
+    constructor(
+        private state: AppState,
+        protected httpClient: HttpClient) {
     }
 
     async loginClicked(event: Event) {
         event.preventDefault();
         event.stopPropagation();
-        console.log(this.email, this.password)
         let response = await this.service.login(this.email, this.password);
-        console.log(response)
+
+        if(response.statusCode == 200 && response.data) {
+            this.state.token = (response.data as IJwt).token;
+            this.state.firstname = (response.data as IJwt).firstname;
+            this.state.lastname = (response.data as IJwt).lastname;
+        }
+
+        
     }
 }

@@ -4,9 +4,13 @@ import { IQueryParams } from "../types/IQueryParams";
 
 export class BaseService<TEntity> {
 
-    constructor(protected apiEndpointUrl: string, protected httpClient: HttpClient) {
+    constructor(protected apiEndpointUrl: string, protected httpClient: HttpClient, private jwt?: string) {
         // apiEndpointUrl = https://xxx.xxx.xxx/api/v1/MealTypes
     }
+
+    private authHeaders = this.jwt !== undefined ? {
+        'Authorization': 'Bearer ' + (this.jwt)
+    } : {};
 
     async getAll(queryParams?: IQueryParams): Promise<IFetchResponse<TEntity[]>> {
         let url = this.apiEndpointUrl;
@@ -16,7 +20,13 @@ export class BaseService<TEntity> {
         }
 
         try {
-            const response = await this.httpClient.fetch(url, { cache: "no-store" });
+
+            const response = await this.httpClient.fetch(
+                url,
+                {
+                    cache: "no-store",
+                    headers: this.authHeaders
+                });
             if (response.ok) {
                 const data = (await response.json()) as TEntity[];
                 return {
@@ -45,7 +55,7 @@ export class BaseService<TEntity> {
         }
 
         try {
-            const response = await this.httpClient.fetch(url, { cache: "no-store" });
+            const response = await this.httpClient.fetch(url, { cache: "no-store", headers: this.authHeaders });
             if (response.ok) {
                 const data = (await response.json()) as TEntity;
                 return {
