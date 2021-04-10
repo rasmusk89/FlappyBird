@@ -1,4 +1,4 @@
-import Aurelia from 'aurelia';
+import Aurelia, { RouterConfiguration } from 'aurelia';
 import { MyApp } from './my-app';
 
 import 'jquery';
@@ -10,5 +10,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../static/site.css';
 
 Aurelia
+  .register(RouterConfiguration)
   .app(MyApp)
   .start();
