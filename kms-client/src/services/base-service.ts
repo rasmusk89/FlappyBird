@@ -8,7 +8,7 @@ export class BaseService<TEntity> {
         // apiEndpointUrl = https://xxx.xxx.xxx/api/v1/MealTypes
     }
 
-    async getAll(queryParams?: IQueryParams,): Promise<IFetchResponse<TEntity[]>> {
+    async getAll(queryParams?: IQueryParams): Promise<IFetchResponse<TEntity[]>> {
         let url = this.apiEndpointUrl;
 
         if (queryParams !== undefined) {

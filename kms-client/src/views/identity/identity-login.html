@@ -5,14 +5,14 @@
             <hr />
             <div class="form-group">
                 <label for="Input_Email">Email</label>
-                <input class="form-control" type="email" id="Input_Email" />
+                <input class="form-control" type="email" id="Input_Email" value.bind="email" />
             </div>
             <div class="form-group">
                 <label for="Input_Password">Password</label>
-                <input class="form-control" type="password" data-val="true" id="Input_Password" />
+                <input class="form-control" type="password" data-val="true" id="Input_Password" value.bind="password" />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Log in</button>
+                <button click.delegate="loginClicked($event)" type="submit" class="btn btn-primary">Log in</button>
             </div>
         </form>
     </div>
