@@ -4,8 +4,11 @@ import { IQueryParams } from "../types/IQueryParams";
 
 export class BaseService<TEntity> {
 
-    constructor(protected apiEndpointUrl: string, protected httpClient: HttpClient, private jwt?: string) {
-        // apiEndpointUrl = https://xxx.xxx.xxx/api/v1/MealTypes
+    constructor(
+        protected apiEndpointUrl: string,
+        protected httpClient: HttpClient,
+        private jwt?: string
+    ) {
     }
 
     private authHeaders = this.jwt !== undefined ? {
@@ -56,6 +59,36 @@ export class BaseService<TEntity> {
 
         try {
             const response = await this.httpClient.fetch(url, { cache: "no-store", headers: this.authHeaders });
+            if (response.ok) {
+                const data = (await response.json()) as TEntity;
+                return {
+                    statusCode: response.status,
+                    data: data,
+                }
+            }
+            return {
+                statusCode: response.status,
+                errorMessage: response.statusText
+            }
+        } catch (reason) {
+            return {
+                statusCode: 0,
+                errorMessage: JSON.stringify(reason)
+            }
+        }
+    }
+
+    async delete(id: string, queryParams?: IQueryParams): Promise<IFetchResponse<TEntity>> {
+        let url = this.apiEndpointUrl;
+        url = url + '/' + id;
+
+        console.log(url)
+        if (queryParams !== undefined) {
+            //TODO: add query params to url
+        }
+
+        try {
+            const response = await this.httpClient.delete(url);
             if (response.ok) {
                 const data = (await response.json()) as TEntity;
                 return {

@@ -18,8 +18,6 @@ export class MealTypeDetails implements IRouteViewModel{
     }
 
     async load(parameters) {
-        console.log("Loaded: ", parameters)
-
         let response = await this.service.get(parameters[0]);
         if (response.data) {
             this.data = response.data;
