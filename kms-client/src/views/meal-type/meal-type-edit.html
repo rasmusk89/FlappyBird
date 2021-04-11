@@ -1,0 +1,44 @@
+<h1>Edit</h1>
+
+<h4>MealType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="/MealTypes/Edit/a42e4110-d115-4fae-90e1-08d8f1fe09ba" method="post">
+
+            <input type="hidden" data-val="true" data-val-required="The Id field is required." id="Id" name="Id"
+                value="a42e4110-d115-4fae-90e1-08d8f1fe09ba" />
+
+
+            <div class="form-group">
+                <label class="control-label" for="MealTypeName">MealTypeName</label>
+                <input class="form-control" type="text" data-val="true"
+                    data-val-maxlength="The field MealTypeName must be a string or array type with a maximum length of &#x27;60&#x27;."
+                    data-val-maxlength-max="60"
+                    data-val-minlength="The field MealTypeName must be a string or array type with a minimum length of &#x27;3&#x27;."
+                    data-val-minlength-min="3" data-val-required="The MealTypeName field is required." id="MealTypeName"
+                    maxlength="60" name="MealTypeName" value="Breakfast" />
+                <span class="text-danger field-validation-valid" data-valmsg-for="MealTypeName"
+                    data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Price">Price</label>
+                <input class="form-control" type="text" data-val="true"
+                    data-val-number="The field Price must be a number." data-val-required="The Price field is required."
+                    id="Price" name="Price" value="1,20" />
+                <span class="text-danger field-validation-valid" data-valmsg-for="Price"
+                    data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <input name="__RequestVerificationToken" type="hidden"
+                value="CfDJ8DFyux_vpIhOl50VctGpEezN6kSsBbmd8yFFDJ63GY9Xuw38JHo-xjYWXaf_ln3kiCm40fG20SdU8vUCktPAoLXvgzuwYkZViUQ5InHMjVmFOyWVtouQQ4yWljYWmdJF3ooBSAE-nKZfSVQacKGm-jw0alVqOz4jTvztY9CyV7ibT5pRobfWNi7GwImZan-SfQ" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a load="/meal-type-index">Back to List</a>
+</div>

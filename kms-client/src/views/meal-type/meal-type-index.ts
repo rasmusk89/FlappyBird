@@ -12,8 +12,6 @@ export class MealTypeIndex {
     }
 
     async attached() {
-        console.log("Attached")
-
         let response = await this.service.getAll();
         if(response.data) {
             this.data = response.data;
