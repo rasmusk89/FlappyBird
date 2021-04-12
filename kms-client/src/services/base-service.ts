@@ -90,21 +90,20 @@ export class BaseService<TEntity> {
         }
 
         try {
-            console.log(url);
             const response = await this.httpClient.delete(url);
 
-            if (response.ok) {
-                const data = (await response.json()) as TEntity;
+            if (response.status == 204) {
                 return {
                     statusCode: response.status,
-                    data: data,
                 }
             }
+
             return {
                 statusCode: response.status,
                 errorMessage: response.statusText
             }
         } catch (reason) {
+
             return {
                 statusCode: 0,
                 errorMessage: JSON.stringify(reason)
@@ -118,31 +117,67 @@ export class BaseService<TEntity> {
         if (queryParams !== undefined) {
             //TODO: add query params to url
         }
+        try {
+            let body: IMealType = { mealTypeName: name, price: price };
+            let bodyStr = JSON.stringify(body);
 
-        let body: IMealType = { mealTypeName: name, price: price };
-        let bodyStr = JSON.stringify(body);
+            const response = await this.httpClient.post(url, bodyStr, { cache: "no-store" });
 
-        const response = await this.httpClient.post(url, bodyStr, { cache: "no-store" });
+            if (response.ok) {
+                const data = (await response.json()) as TEntity;
+                return {
+                    statusCode: response.status,
+                    data: data
+                }
+            }
 
-        if (response.ok) {
-            const data = (await response.json()) as TEntity;
+            const data = (await response.json()) as IMessage;
+
             return {
                 statusCode: response.status,
-                data: data
+                errorMessage: response.statusText + ' ' + data.messages.join(' '),
+            };
+        } catch (reason) {
+            return {
+                statusCode: 0,
+                errorMessage: JSON.stringify(reason)
             }
-        }
-
-        const data = (await response.json()) as IMessage;
-
-        return {
-            statusCode: response.status,
-            errorMessage: response.statusText + ' ' + data.messages.join(' '),
-        };
-    } catch(reason) {
-        return {
-            statusCode: 0,
-            errorMessage: JSON.stringify(reason)
         }
     }
 
+
+    async editMealType(id: string, name: string, price: number, queryParams?: IQueryParams): Promise<IFetchResponse<TEntity>> {
+        let url = this.apiEndpointUrl;
+        url = url + '/' + id;
+
+        if (queryParams !== undefined) {
+            //TODO: add query params to url
+        }
+        try {
+            let body: IMealType = { mealTypeName: name, price: price };
+            let bodyStr = JSON.stringify(body);
+
+            const response = await this.httpClient.put(url, bodyStr, { cache: "no-store" });
+
+            if (response.ok) {
+                const data = (await response.json()) as TEntity;
+                return {
+                    statusCode: response.status,
+                    data: data
+                }
+            }
+
+            const data = (await response.json()) as IMessage;
+
+            return {
+                statusCode: response.status,
+                errorMessage: response.statusText + ' ' + data.messages.join(' '),
+            };
+        } catch (reason) {
+            return {
+                statusCode: 0,
+                errorMessage: JSON.stringify(reason)
+            }
+        }
+    }
 }

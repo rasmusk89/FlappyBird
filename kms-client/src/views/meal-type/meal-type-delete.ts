@@ -10,6 +10,7 @@ export class MealTypeDelete implements IRouteViewModel {
         new BaseService<IMealType>("https://localhost:5001/api/v1/MealTypes", this.httpClient, this.state.token);
 
     private data: IMealType;
+    private id: string;
 
     constructor(
         @IRouter private router: IRouter,
@@ -18,16 +19,19 @@ export class MealTypeDelete implements IRouteViewModel {
     }
 
     async load(parameters) {
+        this.id = parameters[0];
         let response = await this.service.getOne(parameters[0]);
         if (response.data) {
             this.data = response.data;
         }
     }
 
-    async deleteClicked(parameters, event: Event) {
-        let response = await this.service.delete(parameters[0]);
-        if (response.data) {
-            this.data = response.data;
+    async deleteClicked(event: Event) {
+        event.preventDefault();
+        event.stopPropagation();
+        let response = await this.service.delete(this.id);
+        if (response.statusCode == 204) {
+            await this.router.load('/meal-type-index');
         }
     }
 }

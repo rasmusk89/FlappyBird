@@ -25,6 +25,7 @@ export class MealTypeCreate implements IRouteViewModel {
 
     async createClicked(event: Event) {
         event.preventDefault();
+        event.stopPropagation();
         let response = await this.service.createNewMealType(this.mealTypeName, this.mealTypePrice);
 
         if (response.statusCode == 201){
