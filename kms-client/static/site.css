@@ -69,4 +69,7 @@ a.navbar-brand {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
   }
-  
+  body {
+    background-color: rgba(255, 160, 255, 0.2);
+
+  }

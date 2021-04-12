@@ -17,25 +17,17 @@ export class MealTypeDelete implements IRouteViewModel {
         private state: AppState) {
     }
 
-    async attached() {
+    async load(parameters) {
+        let response = await this.service.getOne(parameters[0]);
+        if (response.data) {
+            this.data = response.data;
+        }
     }
 
     async deleteClicked(parameters, event: Event) {
         let response = await this.service.delete(parameters[0]);
         if (response.data) {
             this.data = response.data;
-            await this.router.load('/meal-type-index');
         }
-
-        // let response = await this.service.login(this.email, this.password);
-
-        // if (response.statusCode == 200 && response.data) {
-        //     this.state.token = (response.data as IJwt).token;
-        //     this.state.firstname = (response.data as IJwt).firstname;
-        //     this.state.lastname = (response.data as IJwt).lastname;
-
-        //     await this.router.load('/home-index');
-        // }
-
     }
 }

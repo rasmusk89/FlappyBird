@@ -4,7 +4,6 @@ import { BaseService } from "../../services/base-service";
 import { AppState } from "../../state/app-state";
 
 export class MealTypeDetails implements IRouteViewModel{
-    // https://localhost:5001/api/v1/MealTypes/00000-00000-00000-00000
 
     private service: BaseService<IMealType> =
         new BaseService<IMealType>("https://localhost:5001/api/v1/MealTypes", this.httpClient, this.state.token);
@@ -18,7 +17,7 @@ export class MealTypeDetails implements IRouteViewModel{
     }
 
     async load(parameters) {
-        let response = await this.service.get(parameters[0]);
+        let response = await this.service.getOne(parameters[0]);
         if (response.data) {
             this.data = response.data;
         }

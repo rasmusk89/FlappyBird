@@ -2,7 +2,7 @@
   "name": "kms-client",
   "description": "An Aurelia 2 client application.",
   "version": "0.1.0",
-  "type": "module",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "???"

@@ -1,5 +1,8 @@
-import { HttpClient } from "aurelia";
+import { HttpClient, IRouter } from "aurelia";
+import { IMealType } from "../domain/IMealType";
 import { IFetchResponse } from "../types/IFetchResponse";
+import { IJwt } from "../types/IJwt";
+import { IMessage } from "../types/IMessage";
 import { IQueryParams } from "../types/IQueryParams";
 
 export class BaseService<TEntity> {
@@ -49,7 +52,7 @@ export class BaseService<TEntity> {
         }
     }
 
-    async get(id: string, queryParams?: IQueryParams,): Promise<IFetchResponse<TEntity>> {
+    async getOne(id: string, queryParams?: IQueryParams,): Promise<IFetchResponse<TEntity>> {
         let url = this.apiEndpointUrl;
         url = url + '/' + id;
 
@@ -82,13 +85,14 @@ export class BaseService<TEntity> {
         let url = this.apiEndpointUrl;
         url = url + '/' + id;
 
-        console.log(url)
         if (queryParams !== undefined) {
             //TODO: add query params to url
         }
 
         try {
+            console.log(url);
             const response = await this.httpClient.delete(url);
+
             if (response.ok) {
                 const data = (await response.json()) as TEntity;
                 return {
@@ -107,4 +111,38 @@ export class BaseService<TEntity> {
             }
         }
     }
+
+    async createNewMealType(name: string, price: number, queryParams?: IQueryParams): Promise<IFetchResponse<TEntity>> {
+        let url = this.apiEndpointUrl;
+
+        if (queryParams !== undefined) {
+            //TODO: add query params to url
+        }
+
+        let body: IMealType = { mealTypeName: name, price: price };
+        let bodyStr = JSON.stringify(body);
+
+        const response = await this.httpClient.post(url, bodyStr, { cache: "no-store" });
+
+        if (response.ok) {
+            const data = (await response.json()) as TEntity;
+            return {
+                statusCode: response.status,
+                data: data
+            }
+        }
+
+        const data = (await response.json()) as IMessage;
+
+        return {
+            statusCode: response.status,
+            errorMessage: response.statusText + ' ' + data.messages.join(' '),
+        };
+    } catch(reason) {
+        return {
+            statusCode: 0,
+            errorMessage: JSON.stringify(reason)
+        }
+    }
+
 }
