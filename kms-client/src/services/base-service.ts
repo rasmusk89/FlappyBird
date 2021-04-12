@@ -154,16 +154,18 @@ export class BaseService<TEntity> {
             //TODO: add query params to url
         }
         try {
-            let body: IMealType = { mealTypeName: name, price: price };
+            let body = {
+                id: id,
+                mealTypeName: name,
+                price: price
+            };
             let bodyStr = JSON.stringify(body);
 
-            const response = await this.httpClient.put(url, bodyStr, { cache: "no-store" });
+            const response = await this.httpClient.put(url, bodyStr);
 
             if (response.ok) {
-                const data = (await response.json()) as TEntity;
                 return {
                     statusCode: response.status,
-                    data: data
                 }
             }
 

@@ -13,6 +13,7 @@ export class MealTypeEdit {
     private data: IMealType;
     private mealTypeName: string;
     private mealTypePrice: number;
+    private id: string;
 
 
     constructor(
@@ -26,15 +27,16 @@ export class MealTypeEdit {
         if (response.data) {
             this.data = response.data;
         }
+        this.id = parameters[0];
         this.mealTypeName = response.data.mealTypeName;
         this.mealTypePrice = response.data.price;
     }
 
-    async editClicked(parameters, event: Event) {
+    async editClicked(event: Event) {
         event.preventDefault();
         event.stopPropagation();
-        let response = await this.service.editMealType(parameters[0], this.mealTypeName, this.mealTypePrice);
-        if (response.statusCode == 201){
+        let response = await this.service.editMealType(this.id, this.mealTypeName, this.mealTypePrice);
+        if (response.statusCode == 204) {
             await this.router.load('/meal-type-index');
         }
     }
