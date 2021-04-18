@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { ITeacher } from "@/domain/ITeacher";
+import { ITeacher } from "@/domain/Teacher/ITeacher";
 import store from "@/store";
 
 @Options({

@@ -21,7 +21,7 @@
 </template>
 
 <script  lang="ts">
-import { IMealType } from "@/domain/IMealType";
+import { IMealType } from "@/domain/MealType/IMealType";
 import { Options, Vue } from "vue-class-component";
 
 @Options({

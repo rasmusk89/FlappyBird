@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { IGroup } from "@/domain/IGroup";
+import { IGroup } from "@/domain/Group/IGroup";
 import store from "@/store";
 import { Options, Vue } from "vue-class-component";
 

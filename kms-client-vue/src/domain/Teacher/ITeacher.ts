@@ -1,5 +1,3 @@
-import { IGroup } from "./IGroup";
-
 export interface ITeacher {
     firstName: string,
     lastŃame: string,
