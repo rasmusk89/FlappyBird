@@ -2,7 +2,7 @@
     <div class="meal-type">
         <h1>This is a meal types index page</h1>
         <p>
-            <a load="/meal-type-create">Create New</a>
+            <a href="#">Create New</a>
         </p>
         <table class="table">
             <thead>
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { IMealType } from "@/domain/IMealType";
+import store from "@/store";
 
 @Options({
     components: {},
@@ -40,11 +41,15 @@ import { IMealType } from "@/domain/IMealType";
 export default class MealTypeIndex extends Vue {
     mealTypes: IMealType[] = [];
 
+    get token(): string | null {
+        return store.state.token;
+    }
+
     async mounted(): Promise<void> {
         const response = await this.axios.get(
             "https://localhost:5001/api/v1/MealTypes"
         );
-        console.log(response.data);
+        console.log(this.token);
         this.mealTypes = response.data;
     }
 }

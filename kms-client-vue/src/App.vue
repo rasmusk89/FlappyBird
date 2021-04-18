@@ -19,29 +19,31 @@
                 <div
                     class="navbar-collapse collapse d-sm-inline-flex justify-content-between"
                 >
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>
-                            <router-link
-                                class="nav-link text-dark"
-                                to="/meal-types"
-                                >Meal types</router-link
-                            >
-                        </li>
-                        <li>
-                            <router-link
-                                class="nav-link text-dark"
-                                to="/groups"
-                                >Groups</router-link
-                            >
-                        </li>
-                        <li>
-                            <router-link
-                                class="nav-link text-dark"
-                                to="/teachers"
-                                >Teachers</router-link
-                            >
-                        </li>
-                    </ul>
+                    <div>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>
+                                <router-link
+                                    class="nav-link text-dark"
+                                    to="/meal-types"
+                                    >Meal types</router-link
+                                >
+                            </li>
+                            <li>
+                                <router-link
+                                    class="nav-link text-dark"
+                                    to="/groups"
+                                    >Groups</router-link
+                                >
+                            </li>
+                            <li>
+                                <router-link
+                                    class="nav-link text-dark"
+                                    to="/teachers"
+                                    >Teachers</router-link
+                                >
+                            </li>
+                        </ul>
+                    </div>
                     <ul v-if="token == null" class="navbar-nav">
                         <li class="nav-item">
                             <router-link
@@ -90,7 +92,7 @@ export default class App extends Vue {
 
     logOut(): void {
         store.commit("logOut");
-        this.$router.push('/');
+        this.$router.push("/");
     }
 }
 </script>
