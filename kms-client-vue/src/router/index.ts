@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue';
 import Login from '../views/identity/Login.vue';
-import MealType from '../views/meal-type/MealTypeIndex.vue';
+import MealTypeIndex from '../views/meal-type/MealTypeIndex.vue';
+import MealTypeDetails from '../views/meal-type/MealTypeDetails.vue';
 import Group from '../views/group/GroupIndex.vue';
 import Teacher from '../views/teacher/TeacherIndex.vue';
 
@@ -26,8 +27,13 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/meal-types',
-        name: 'MealTypes',
-        component: MealType,
+        name: 'MealTypeIndex',
+        component: MealTypeIndex,
+    },
+    {
+        path: '/meal-types/:id',
+        name: 'MealTypeDetails',
+        component: MealTypeDetails,
     },
     {
         path: '/groups',

@@ -1,6 +1,7 @@
 <template>
     <div class="meal-type">
-        <h1>This is a meal types index page</h1>
+        <h1>MealTypes index</h1>
+        <br />
         <p>
             <a href="#">Create New</a>
         </p>
@@ -14,13 +15,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in mealTypes" :key="index">
-                    <td>{{item.id}}</td>
-                    <td>{{item.mealTypeName}}</td>
-                    <td>{{item.price}}</td>
+                <tr v-for="(mealType, index) in mealTypes" :key="index">
+                    <td>{{ mealType.id }}</td>
+                    <td>{{ mealType.mealTypeName }}</td>
+                    <td>{{ mealType.price }}</td>
                     <td>
                         <a load="/meal-type-edit(${item.id})">Edit</a> |
-                        <a load="/meal-type-details(${item.id})">Details</a> |
+                        <router-link :to="'/meal-types/' + mealType.id"
+                            >Details</router-link
+                        >
+                        |
                         <a load="/meal-type-delete(${item.id})">Delete</a>
                     </td>
                 </tr>
