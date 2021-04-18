@@ -28,14 +28,14 @@
                                     >Meal types</router-link
                                 >
                             </li>
-                            <li>
+                            <li v-if="token != null">
                                 <router-link
                                     class="nav-link text-dark"
                                     to="/groups"
                                     >Groups</router-link
                                 >
                             </li>
-                            <li>
+                            <li v-if="token != null">
                                 <router-link
                                     class="nav-link text-dark"
                                     to="/teachers"

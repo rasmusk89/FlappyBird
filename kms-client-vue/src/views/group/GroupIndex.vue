@@ -47,7 +47,7 @@ export default class GroupIndex extends Vue {
             "https://localhost:5001/api/v1/Groups",
             { headers: { Authorization: "Bearer " + this.token } }
         );
-        console.log(response.data);
+        console.log(response.data[0]);
         this.groups = response.data;
     }
 }

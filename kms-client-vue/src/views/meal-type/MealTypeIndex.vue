@@ -32,7 +32,6 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { IMealType } from "@/domain/IMealType";
-import store from "@/store";
 
 @Options({
     components: {},
@@ -41,15 +40,10 @@ import store from "@/store";
 export default class MealTypeIndex extends Vue {
     mealTypes: IMealType[] = [];
 
-    get token(): string | null {
-        return store.state.token;
-    }
-
     async mounted(): Promise<void> {
         const response = await this.axios.get(
             "https://localhost:5001/api/v1/MealTypes"
         );
-        console.log(this.token);
         this.mealTypes = response.data;
     }
 }

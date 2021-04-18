@@ -55,7 +55,6 @@ export default class TeachersIndex extends Vue {
                 },
             }
         );
-        console.log(response.data);
         this.teachers = response.data;
     }
 }
