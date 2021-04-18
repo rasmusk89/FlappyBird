@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/identity/Login.vue'
+import Home from '../views/Home.vue';
+import Login from '../views/identity/Login.vue';
+import MealType from '../views/meal-type/MealTypeIndex.vue';
+import Group from '../views/group/GroupIndex.vue';
+import Teacher from '../views/teacher/TeacherIndex.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -20,6 +23,21 @@ const routes: Array<RouteRecordRaw> = [
         path: '/identity/login',
         name: 'identity-login',
         component: Login,
+    },
+    {
+        path: '/meal-types',
+        name: 'MealTypes',
+        component: MealType,
+    },
+    {
+        path: '/groups',
+        name: 'Groups',
+        component: Group,
+    },
+    {
+        path: '/teachers',
+        name: 'Teacher',
+        component: Teacher,
     },
 
 ]
