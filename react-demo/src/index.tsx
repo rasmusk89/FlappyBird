@@ -10,6 +10,16 @@ import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Groups from './views/Groups';
+import Home from './views/Home';
+
+const SimpleRouter = (): JSX.Element => {
+	const route = window.location.pathname;
+	if (route === '/Groups') {
+		return <Groups />
+	}
+	return <Home />
+}
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -17,9 +27,7 @@ ReactDOM.render(
 
 		<div className="container">
 			<main role="main" className="pb-3">
-				<div className="text-center">
-					<h1 className="display-4">Hello, React</h1>
-				</div>
+				<SimpleRouter />
 			</main>
 		</div>
 
