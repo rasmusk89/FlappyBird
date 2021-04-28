@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = (): JSX.Element => (
+const Header = (props: { name: string }): JSX.Element => (
     <header>
         <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div className="container">
@@ -18,6 +18,12 @@ const Header = (): JSX.Element => (
                             </li>
                         </div>
                     </ul>
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            {props.name}
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </nav>
