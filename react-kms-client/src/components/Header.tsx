@@ -15,6 +15,10 @@ const Header = () => {
                     <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul className="navbar-nav flex-grow-1">
 
+                            <li>
+                                <NavLink className="nav-link text-dark" to="/MealTypes">Meal Types</NavLink>
+                            </li>
+                            {/*
                             <div className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/">Controllers</a>
                                 <ul className="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -50,6 +54,7 @@ const Header = () => {
                                     </li>
                                 </ul>
                             </div>
+
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle text-dark" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Languages</a>
@@ -58,11 +63,14 @@ const Header = () => {
                                     <a className="nav-link text-dark" href="/Home/SetLanguage?culture=en-GB&amp;returnUrl=%2F">English (United Kingdom)</a>
                                 </div>
                             </li>
+                            */}
                         </ul>
                         <ul className="navbar-nav">
+                            {/*
                             <li className="nav-item">
                                 <a className="nav-link text-dark" href="/Identity/Account/Register">Register</a>
                             </li>
+                            */}
                             <li className="nav-item">
                                 <NavLink className="nav-link text-dark" to="/identity/login">Log in</NavLink>
                             </li>
