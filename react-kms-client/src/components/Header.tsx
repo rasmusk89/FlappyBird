@@ -18,6 +18,11 @@ const Header = () => {
                             <li>
                                 <NavLink className="nav-link text-dark" to="/MealTypes">Meal Types</NavLink>
                             </li>
+
+                            <li>
+                                <NavLink className="nav-link text-dark" to="/form">FormDemo</NavLink>
+                            </li>
+
                             {/*
                             <div className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/">Controllers</a>

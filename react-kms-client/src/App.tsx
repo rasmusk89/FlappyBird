@@ -10,6 +10,7 @@ import MealTypeDetails from './containers/meal-types/MealTypeDetails';
 import MealTypeDelete from './containers/meal-types/MealTypeDelete';
 import Login from './containers/identity/Login';
 import Page404 from './containers/Page404';
+import PageForm from './containers/PageForm';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <main role="main" className="pb-3">
                     <Switch>
                         <Route exact path="/" component={HomeIndex} />
+                        <Route path="/form" component={PageForm} />
                         <Route path="/identity/login" component={Login} />
 
                         <Route path="/MealTypes/create" component={MealTypeCreate} />
