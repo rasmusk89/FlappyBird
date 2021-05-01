@@ -24,7 +24,6 @@ export abstract class BaseService {
 
     static async getAll<TEntity>(apiEndpoint: string, jwt?: string): Promise<IFetchResponse<TEntity[]>> {
         try {
-
             let response = await this.axios.get<TEntity[]>(apiEndpoint, BaseService.getAxiosConfig(jwt));
             return {
                 ok: response.status <= 299,
