@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Header = () => {
+
+    const appState = useContext(AppContext);
+
     return (
         <header>
 
@@ -77,9 +81,10 @@ const Header = () => {
                             </li>
                             */}
                             <li className="nav-item">
-                                <NavLink className="nav-link text-dark" to="/identity/login">Log in</NavLink>
+                                <NavLink className="nav-link text-dark" to="/identity/login">Log in {appState.firstName}</NavLink>
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </nav>
