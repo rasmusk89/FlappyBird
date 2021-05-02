@@ -52,7 +52,6 @@ const FormView = (props: IFormProps) => {
             <div className="input-group mb-3">
                 <label className="input-group-text" htmlFor="formInputSelectList">Selectlist</label>
                 <select value={props.values.select} onChange={(e) => props.handleChange(e.target)} className="form-select" id="formInputSelectList">
-                    <option selected>Choose...</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>

@@ -15,7 +15,7 @@ import { AppContextProvider, initialAppState } from './context/AppContext';
 
 function App() {
 
-    const setAuthInfo = (jwt: string, firstName: string, lastName: string):void => {
+    const setAuthInfo = (jwt: string | null, firstName: string, lastName: string):void => {
         setAppState({...appState, jwt, firstName, lastName});
     };
 

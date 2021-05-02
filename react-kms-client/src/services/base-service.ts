@@ -1,7 +1,7 @@
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { ApiBaseUrl } from '../configuration';
 import { IFetchResponse } from '../types/IFetchResponse';
-import { IMessages } from './IMessages';
+import { IMessages } from '../types/IMessages';
 
 export abstract class BaseService {
     protected static axios = Axios.create({
