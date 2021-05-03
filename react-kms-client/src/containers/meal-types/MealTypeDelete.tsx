@@ -40,6 +40,8 @@ const MealTypeDelete = () => {
 
     return (
         <>
+        {// If statusCode === 204 <Redirect> else render this page
+        }
             <h1>Delete</h1>
 
             <h3>Are you sure you want to delete this?</h3>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header'
 import Footer from './components/Footer';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import HomeIndex from './containers/home/HomeIndex';
 import MealTypeIndex from './containers/meal-types/MealTypeIndex';
 import MealTypeCreate from './containers/meal-types/MealTypeCreate';

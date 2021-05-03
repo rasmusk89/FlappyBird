@@ -80,9 +80,11 @@ export abstract class BaseService {
         }
     }
 
-    static async create<TEntity>(apiEndpoint: string, data: TEntity, jwt?: string): Promise<IFetchResponse<TEntity>> {
+    static async create<TEntity>(apiEndpoint: string, entity: TEntity, jwt?: string): Promise<IFetchResponse<TEntity>> {
+        let entityDataJson = JSON.stringify(entity);
+        
         try {
-            let response = await this.axios.post(apiEndpoint, data, BaseService.getAxiosConfig(jwt));
+            let response = await this.axios.post(apiEndpoint, entityDataJson);
             return {
                 ok: response.status <= 299,
                 statusCode: response.status,
