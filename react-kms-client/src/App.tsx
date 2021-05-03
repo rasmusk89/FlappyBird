@@ -15,19 +15,19 @@ import { AppContextProvider, initialAppState } from './context/AppContext';
 
 function App() {
 
-    const setAuthInfo = (jwt: string | null, firstName: string, lastName: string):void => {
-        setAppState({...appState, jwt, firstName, lastName});
+    const setAuthInfo = (jwt: string | null, firstName: string, lastName: string): void => {
+        setAppState({ ...appState, jwt, firstName, lastName });
     };
 
-    const [appState, setAppState] = useState({...initialAppState, setAuthInfo});
+    const [appState, setAppState] = useState({ ...initialAppState, setAuthInfo });
 
     return (
         <>
             <AppContextProvider value={appState}>
                 <Header />
-
                 <div className="container">
                     <main role="main" className="pb-3">
+
                         <Switch>
                             <Route exact path="/" component={HomeIndex} />
                             <Route path="/form" component={PageForm} />
@@ -41,6 +41,7 @@ function App() {
 
                             <Route component={Page404} />
                         </Switch>
+
                     </main>
                 </div>
 

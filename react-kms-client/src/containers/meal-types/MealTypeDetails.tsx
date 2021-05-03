@@ -36,7 +36,7 @@ const MealTypeDetails = () => {
             <table className="table">
                 <thead>
                     <tr>
-                    <th>
+                        <th>
                             Id
                         </th>
                         <th>
@@ -45,7 +45,9 @@ const MealTypeDetails = () => {
                         <th>
                             Price
                         </th>
-                        <th></th>
+                        <th>
+
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
